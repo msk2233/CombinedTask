@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+<link href="/form.css" rel="stylesheet">
+
+<style>
+
+</style>
+
+<body onload="state()">
+    <div class="response">
+        <h1 id="response"></h1>
+    </div>
+
+    <form id="regForm">
+        <input type="text" name="id" id="id" style="visibility: hidden;">
+        <h1>Job Application Form:</h1>
+        <!-- One "tab" for each step in the form: -->
+        <div class="tab">
+            <table id="basicdetailtable" name="basicdetails" class="basicdetailtable">
+                <th colspan="3">
+                    <h2>Basic Detail</h2>
+                </th>
+                <tr>
+                    <td>
+                        <div id="firstname">First Name
+                            <input type="text" id="fname" name="fname" class="req">
+                            <p id="fnameerror" class="error-message"></p>
+                    </td>
+                    &nbsp;
+                    <td>
+                        <div id="lastname">Last Name<input type="text" id="lname" name="lname" class="req">
+                            <p id="lnameerror" class="error-message"></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div>Designation <input type="text" id="designation" name="designation" class="req">
+                            </p>
+                            <p id="designationerror" class="error-message"></p>
+                    </td>
+                    <td rowspan="2">
+                        Address 1<textarea rows="2" ,cols="5" name="address1" id="address1" class="req"></textarea>
+                        <p id="address1error" class="error-message"></p>
+                    </td>
+                    <td rowspan="2"> Address 2
+                        <textarea rows="2" ,cols="5" name="address2" id="address2" class="req"></textarea>
+                        <p id="address2error" class="error-message"></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Email <input type="text" id="email" name="email" class="req">
+                        <p id="emailerror" class="error-message"></p>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td>Ph Number <input name="phno" id="phonenumber" class="req">
+                        <p id="phonenumbererror" class="error-message"></p>
+                    </td>
+                    <td> State
+                        <select name="state" id="state" onchange="selectcity(this.value)">
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Gender <input type="radio" name="gender" value="Male" checked>Male<input type="radio"
+                            name=gender value="Female">Female</td>
+                    <td>
+                        City <select name="city" id="city" class="req"></select>
+                        <p id="cityerror" class="error-message"></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Relationship Status
+                        <select id=rstatus name="rstatus">
+                            <option value="single">Single</option>
+                            <option value="Married">Married</option>
+                        </select>
+                    </td>
+                    <td>Zip Code <input type="text" id="zipcode" name="zipcode" class="req">
+                        <p id="zipcodeerror" class="error-message"></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Date Of Birth <input id="dob" name="dob" placeholder="yyyy-mm-dd" class="req">
+                        <p id="doberror" class="error-message"></p>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="tab">
+            <table name="education">
+                <th colspan="4">
+                    <h2>Education</h2>
+                </th>
+                <tr>
+                    <td>SSC result</td>
+                </tr>
+                <tr>
+                    <td>Name of the board
+                        <input type="text" name="nob_ssc" id="nob_ssc"><span class="requiredssc" id="p_req"
+                            style="margin-left: 5px;"></span>
+                    </td>
+                    <td>Passing Year
+                        <input type="text" name="ps_ssc" id="ps_ssc"><span class="requiredssc" id="p_req"
+                            style="margin-left: 5px;"></span>
+                    </td>
+                    <td>Percentage
+                        <input type="text" name="percentage_ssc" id="tage_ssc"><span class="requiredssc" id="p_req"
+                            style="margin-left: 5px;"></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>HSC RESULT</td>
+                </tr>
+                <tr>
+                    <td>Name of the board
+                        <input type="text" name="nob_hsc" id="nob_hsc"><span class="requiredhsc"
+                            style="margin-left: 5px;"></span>
+                    </td>
+                    <td>Passing Year
+                        <input type="text" name="ps_hsc" id="ps_hsc"><span class="requiredhsc"
+                            style="margin-left: 5px;"></span>
+                    </td>
+                    <td>Percentage
+                        <input type="text" name="percentage_hsc" id="tage_hsc"><span class="requiredhsc"
+                            style="margin-left: 5px;"></span>
+                    </td>
+                </tr>
+
+                <TR>
+                    <TD> BACHELOR DEGREE</TD>
+                </TR>
+                <tr>
+                    <td>
+                        Course Name <input type="text" name="coursename_bach" id="coursename_bach">
+                        <span class="requiredbech" style="margin-left: 5px;"></span>
+                    </td>
+                    <td>
+                        Passing Year <input type="text" name="ps_bach" id="ps_bach">
+                        <span class="requiredbech" style="margin-left: 5px;"></span>
+                    </td>
+                    <td>
+                        Percentage <input type="text" name="percentage_bach" id="tage_bach">
+                        <span class="requiredbech" style="margin-left: 5px;"></span>
+                    </td>
+                </tr>
+
+                <TR>
+                    <TD> MASTER DEGREE</TD>
+                </TR>
+                <tr>
+                    <td>
+                        Course Name <input type="text" name="coursename_mas" id="coursename_mas">
+                        <span class="requiredmas" style="margin-left: 5px;"></span>
+                    </td>
+                    <td>
+                        Passing Year <input type="text" name="ps_mas" id="ps_mas">
+                        <span class="requiredmas" style="margin-left: 5px;"></span>
+                    </td>
+                    <td>
+                        Percentage <input type="text" name="percentage_mas" id="tage_mas">
+                        <span class="requiredmas" style="margin-left: 5px;"></span>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="tab">
+            <table name="work Experience">
+                <th colspan="4">
+                    <h2>Work Experience</h2>
+                </th>
+                <tr>
+                    <td> Company name <input type="text" name="companyname1" id="companyname1">
+                        <span class="required_exp1"></span>
+                    </td>
+                    <td> Designation <input type="text" name="designation_exp1" id="designation_exp1">
+                        <span class="required_exp1"></span>
+                    </td>
+                    <td> From <input type="text" name="date_of_join_exp1" id="date_of_join_exp1">
+                        <span class="required_exp1"></span>
+                    </td>
+                    <td> To <input type="text" name="date_of_coplition_exp1" id="date_of_coplition_exp1">
+                        <span class="required_exp1"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td> Company name <input type="text" name="companyname2" id="companyname2"> <span
+                            class="required_exp2" style="margin-left: 5px;"></span></td>
+                    <td> Designation <input type="text" name="designation_exp2" id="designation_exp2"> <span
+                            class="required_exp2" style="margin-left: 5px;"></span></td>
+                    <td> From <input type="text" id="date_of_join_exp2" name="date_of_join_exp2"> <span
+                            class="required_exp2" style="margin-left: 5px;"></span></td>
+                    <td> To <input type="text" id="date_of_coplition_exp2" name="date_of_coplition_exp2"> <span
+                            class="required_exp2" style="margin-left: 5px;"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td> Company name <input type="text" id="companyname3" name="companyname3"><span
+                            class="required_exp3" style="margin-left: 5px;"></span> </td>
+                    <td> Designation <input type="text" id="designation_exp3" name="designation_exp3"><span
+                            class="required_exp3" style="margin-left: 5px;"></span> </td>
+                    <td> From <input type="text" id="date_of_join_exp3" name="date_of_join_exp3"><span
+                            class="required_exp3" style="margin-left: 5px;"></span> </td>
+                    <td> To <input type="text" id="date_of_coplition_exp3" name="date_of_coplition_exp3">
+                    </td>
+                </tr>
+            </table>
+
+        </div>
+        <div class="tab">
+            <table>
+                <tr>
+                    <td>
+                        <table name="language" style="margin-right: 200px;">
+                            <th>Known language</th>
+                            <tr>
+                                <td>
+                                    Hindi
+                                </td>
+                                <td> <input type="checkbox" id="rhindi" name="rhindi"> read</td>
+                                <td> <input type="checkbox" id="whindi" name="whindi"> Write </td>
+                                <td> <input type="checkbox" id="shindi" name="shindi"> Speak</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    English
+                                </td>
+                                <td> <input type="checkbox" name="renglish" id="renglish"> read </td>
+                                <td><input type="checkbox" name="wenglish" id="wenglish"> Write </td>
+                                <td> <input type="checkbox" name="senglish" id="senglish"> Speak </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Gujarati
+                                </td>
+                                <td> <input type="checkbox" name="rgujarati" id="rgujarati"> read </td>
+                                <td> <input type="checkbox" name="wgujarati" id="wgujarati"> Write </td>
+                                <td> <input type="checkbox" name="sgujarati" id="sgujarati"> Speak </td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td>
+                        <table name="technology">
+                            <th>Technologies you know</th>
+                            <tr>
+                                <td>
+                                    <input type="checkbox" id="phpcheckbox" name="phpcheckbox"
+                                        onclick="enableradio(this)"> PHP
+                                </td>
+                                <td> <input type="radio" name="php" id="Beginer1" value="Beginer" disabled> Beginer</td>
+                                <td><input type="radio" name="php" id="Mideator1" value="Mideator" disabled>Mideator
+                                </td>
+                                <td><input type="radio" name="php" id="Expert1" value="Expert" disabled>Expert
+                            </tr>
+                    </td>
+                <tr>
+                    <td>
+                        <input type="checkbox" id="mysqlcheckbox" name="mysqlcheckbox" onclick="enableradio(this)">
+                        Mysql
+                    </td>
+                    <td> <input type="radio" name="mysql" value="Beginer" id="Beginer2" disabled> Beginer</td>
+                    <td> <input type="radio" name="mysql" value="Mideator" id="Mideator2" disabled>Mideator</td>
+                    <td> <input type="radio" name="mysql" value="Expert" id="Expert2" isabled>Expert
+
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+
+                        <input type="checkbox" id="laravelcheckbox" name="laravelcheckbox" onclick="enableradio(this)">
+                        laravel
+                    </td>
+                    <td> <input type="radio" name="laravel" id="Beginer3" value="Beginer" disabled> Beginer</td>
+                    <td> <input type="radio" name="laravel" id="Mideator3" value="Mideator" disabled>Mideator</td>
+                    <td> <input type="radio" name="laravel" id="Expert3" value="Expert" disabled>Expert
+
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+
+                        <input type="checkbox" id="oraclecheckbox" name="oraclecheckbox" onclick="enableradio(this)">
+                        Oracle
+                    </td>
+                    <td> <input type="radio" name="oracle" id="Beginer4" value="Beginer" disabled> Beginer</td>
+                    <td> <input type="radio" name="oracle" id="Mideator4" value="Mideator" disabled>Mideator</td>
+                    <td> <input type="radio" name="oracle" id="Expert4" value="Expert" disabled>Expert
+
+                    </td>
+                </tr>
+            </table>
+            </td>
+            </tr>
+            </table>
+
+        </div>
+        <div class="tab">
+            <table name="Referance contact">
+                <th colspan="3">Referance contact</th>
+                <tr>
+                    <td> Name <input type="text" name="ref_name_1" id="ref_name_1"> </td>
+                    <td>Contact Number <input type="text" name="contact_ref_1" id="contact_ref_1"></td>
+                    <td>Relation <input type="text" name="contact_ref_relation1" id="contact_ref_relation_1">
+                    </td>
+                </tr>
+                <tr>
+                    <td> Name <input type="text" name="ref_name_2" id="ref_name_2"> </td>
+                    <td>Contact Number <input type="text" name="contact_ref_2" id="contact_ref_2"></td>
+                    <td>Relation <input type="text" name="contact_ref_relation2" id="contact_ref_relation_2">
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="tab">
+            <table name="Preferances">
+                <th colspan="5">Preferances </th>
+                <tr>
+                    <td rowspan="3">Prefered Location</td>
+                    <td><select multiple name="location[]">
+                            <option value="Ahmedabad">Ahmedabad</option>
+                            <option value="Bhavnagar">Bhavnagar</option>
+                            <option value="Rajkot">Rajkot</option>
+                        </select></td>
+                    <td>
+                        <table>
+                            <tr>
+                                <td> Notice period <input type="text" name="notice_period" id="notice_prd">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td> Expected ctc <input type="text" name="exp_ctc" id="exp_ctc"></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Current ctc <input type="text" name="cur_ctc" id="cur_ctc">
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td rowspan="3">
+                    </td>
+                    <td> department
+                        <select name="department" id="department">
+                            <option id="development" value="development">development</option>
+                            <option id="marketing" value="marketing">marketing</option>
+                        </select>
+                    </td>
+                </tr>
+            </table>
+        </div>
+       
+            <button type="button" id="submitbtn" onclick="submitdata();">SUBMIT</button>
+        
+    </form>
+
+    <script>
+        var submittype = '<%= submittype %>';
+
+        var id = '<%= id %>'
+        if (submittype == 'update') {
+            document.getElementById('id').value = id;
+            async function func1(id) {
+                var url = await fetch(`http://localhost:8080/fetch/?id=${id}`)
+                    .then(resp => resp.json())
+
+                //BASIC DETAIL
+                var basicinput = document.getElementById('basicdetailtable').getElementsByTagName('input');
+                var j = 0;
+                for (let i = 0; i < basicinput.length; i++) {
+                    basicinput[i].value = url.result1[0][basicinput[i].name];
+                }
+                var gen = document.getElementsByName('gender');
+                if (url.result1[0].gender == 'Male') {
+                    gen[0].checked = "true";
+                }
+                else {
+                    gen[1].checked = "true";
+                }
+                var rstatus = document.getElementsByName('rstatus');
+                if (url.result1[0].rstatus == 'single') {
+                    rstatus[0][0].selected = 'selected';
+                }
+                else {
+                    rstatus[0][1].selected = 'selected';
+                }
+                document.getElementById('address1').value = url.result1[0].address1;
+                document.getElementById('address2').value = url.result1[0].address2;
+
+                //EDUCATION DETAIL
+                document.getElementById('nob_ssc').value = url.result2[0].board_course;
+                document.getElementById('ps_ssc').value = url.result2[0].passing_year;
+                document.getElementById('tage_ssc').value = url.result2[0].percentage;
+
+                document.getElementById('nob_hsc').value = url.result2[1].board_course;
+                document.getElementById('ps_hsc').value = url.result2[1].passing_year;
+                document.getElementById('tage_hsc').value = url.result2[1].percentage;
+
+
+                document.getElementById('coursename_bach').value = url.result2[2].board_course;
+                document.getElementById('ps_bach').value = url.result2[2].passing_year;
+                document.getElementById('tage_bach').value = url.result2[2].percentage;
+
+                document.getElementById('coursename_mas').value = url.result2[3].board_course;
+                document.getElementById('ps_mas').value = url.result2[3].passing_year;
+                document.getElementById('tage_mas').value = url.result2[3].percentage;
+
+                //WORK EXPERIENCE 
+
+                console.log((url.result3));
+                document.getElementById('companyname1').value = url.result3[0].ComapanyName;
+                document.getElementById('designation_exp1').value = url.result3[0].Designation;
+                document.getElementById('date_of_join_exp1').value = url.result3[0].Dateofjoining;
+                document.getElementById('date_of_coplition_exp1').value = url.result3[0].Dateofcompliting;
+
+                document.getElementById('companyname2').value = url.result3[1].ComapanyName;
+                document.getElementById('designation_exp2').value = url.result3[1].Designation;
+                document.getElementById('date_of_join_exp2').value = url.result3[1].Dateofjoining;
+                document.getElementById('date_of_coplition_exp2').value = url.result3[1].Dateofcompliting;
+
+                document.getElementById('companyname3').value = url.result3[2].ComapanyName;
+                document.getElementById('designation_exp3').value = url.result3[2].Designation;
+                document.getElementById('date_of_join_exp3').value = url.result3[2].Dateofjoining;
+                document.getElementById('date_of_coplition_exp3').value = url.result3[2].Dateofcompliting;
+
+
+                //LANGUAGE
+                if (url.result4[0].can_read == 1) {
+                    document.getElementById('rhindi').checked = true;
+                }
+                else {
+                    document.getElementById('rhindi').checked = false;
+                }
+                if (url.result4[0].can_write == 1) {
+                    document.getElementById('whindi').checked = true;
+                }
+                else {
+                    document.getElementById('whindi').checked = false;
+                }
+                if (url.result4[0].can_speak == 1) {
+                    document.getElementById('shindi').checked = true;
+                }
+                else {
+                    document.getElementById('shindi').checked = false;
+                }
+
+                if (url.result4[1].can_read == 1) {
+                    document.getElementById('renglish').checked = true;
+                }
+                else {
+                    document.getElementById('renglish').checked = false;
+                }
+                if (url.result4[1].can_write == 1) {
+                    document.getElementById('wenglish').checked = true;
+                }
+                else {
+                    document.getElementById('wenglish').checked = false;
+                }
+                if (url.result4[1].can_speak == 1) {
+                    document.getElementById('senglish').checked = true;
+                }
+                else {
+                    document.getElementById('senglish').checked = false;
+                }
+
+                if (url.result4[2].can_read == 1) {
+                    document.getElementById('rgujarati').checked = true;
+                }
+                else {
+                    document.getElementById('rgujarati').checked = false;
+                }
+                if (url.result4[2].can_write == 1) {
+                    document.getElementById('wgujarati').checked = true;
+                }
+                else {
+                    document.getElementById('wgujarati').checked = false;
+                }
+                if (url.result4[2].can_speak == 1) {
+                    document.getElementById('sgujarati').checked = true;
+                }
+                else {
+                    document.getElementById('sgujarati').checked = false;
+                }
+
+                //TECHNOLOGY
+
+                if (url.result5[0].Name_of_technology == 'PHP') {
+                    document.getElementById('phpcheckbox').checked = true;
+
+                    var experties1 = document.getElementsByName('php')
+                    for (let i = 0; i < experties1.length; i++) {
+                        if (url.result5[0].Experties == experties1[i].value) {
+                            document.getElementById(`${experties1[j].value}1`).checked = true;
+                        }
+                    }
+                }
+                if (url.result5[1].Name_of_technology == 'MySql') {
+                    document.getElementById('mysqlcheckbox').checked = true;
+
+                    var experties2 = document.getElementsByName('mysql')
+                    for (let j = 0; j < experties2.length; j++) {
+                        if (url.result5[1].Experties == experties2[j].value) {
+                            document.getElementById(`${experties1[j].value}2`).checked = true;
+                        }
+                    }
+                }
+                if (url.result5[2].Name_of_technology == 'Laravel') {
+                    document.getElementById('laravelcheckbox').checked = true;
+
+                    var experties2 = document.getElementsByName('laravel')
+                    for (let z = 0; z < experties2.length; z++) {
+                        if (url.result5[2].Experties == experties2[z].value) {
+                            document.getElementById(`${experties1[z].value}3`).checked = true;
+                        }
+                    }
+                }
+                if (url.result5[3].Name_of_technology == 'Oracle') {
+                    document.getElementById('oraclecheckbox').checked = true;
+
+                    var experties = document.getElementsByName('oracle')
+                    for (let k = 0; k < experties.length; k++) {
+                        if (url.result5[3].Experties == experties[k].value) {
+                            document.getElementById(`${experties1[k].value}4`).checked = true;
+                        }
+                    }
+                }
+
+
+                //REFERANCE
+                document.getElementById('ref_name_1').value = url.result6[0].NameOfContact;
+                document.getElementById('contact_ref_1').value = url.result6[0].ContactNumber;
+
+                document.getElementById('contact_ref_relation_1').value = url.result6[0].Relation;
+
+                document.getElementById('ref_name_2').value = url.result6[1].NameOfContact;
+                document.getElementById('contact_ref_2').value = url.result6[1].ContactNumber;
+                document.getElementById('contact_ref_relation_2').value = url.result6[1].Relation;
+
+                //PREFERENCES
+
+                document.getElementById('notice_prd').value = url.result7[0].notice_period;
+                document.getElementById('exp_ctc').value = url.result7[0].expected_ctc;
+                document.getElementById('cur_ctc').value = url.result7[0].curr_ctc;
+
+                var x = document.getElementById('department').getElementsByTagName('option');
+
+                if (x[0].value == url.result7[0].department) {
+                    document.getElementById(x[0].value).selected = 'selected';
+                }
+                if (x[1].value == url.result7[0].department) {
+                    document.getElementById(x[0].value).selected = 'selected';
+                }
+            }
+            func1(id);
+        }
+
+        async function submitdata() {
+            //FETCH URL AND POST THE DATA 
+            var form = document.getElementById('regForm');
+            const formData = new URLSearchParams(new FormData(form));
+            if (submittype == 'insert') {
+                var url = "http://localhost:8080/dashboard/tk13_main/post_data"
+                var res1 = await fetch(url, {
+                    method: "POST",
+                    body: formData,
+                    headers: {
+                        "Content-type": "application/x-www-form-urlencoded"
+                    }
+                });
+                var response = await res1.json();
+
+                //BACKEND VALIDATION ERROR 
+                if (response.fail == null) {
+                    form.style.visibility = "hidden";
+                    document.getElementById('response').innerText = "ERROR IN YOUR INPUT";
+                }
+
+                //RESPONSE FOR SUCCESS OF SUBMIT 
+                if (response.fail == "no") {
+                    form.style.visibility = "hidden";
+                    document.getElementById('response').innerText = "YOUR RESPONSE HAVE BEEN SUBMITTED";
+                }
+            }
+            else {
+                var url = "http://localhost:8080/dashboard/tk13_main/update"
+                var res1 = await fetch(url, {
+                    method: "POST",
+                    body: formData,
+                    headers: {
+                        "Content-type": "application/x-www-form-urlencoded"
+                    }
+                });
+                var response = await res1.json();
+
+                //BACKEND VALIDATION ERROR 
+                if (response.fail == null) {
+                    form.style.visibility = "hidden";
+                    document.getElementById('response').innerText = "ERROR IN YOUR INPUT";
+                    document.getElementById('response').style.color = "black";
+                }
+
+                //RESPONSE FOR SUCCESS OF SUBMIT 
+                if (response.fail == "no") {
+                    form.style.visibility = "hidden";
+                    document.getElementById('response').innerText = "YOUR DATA HAVE BEEN UPDATED";
+                }
+            }
+        }
+
+
+        //FOR DISPLAYING STATES 
+        async function state() {
+            var sl = document.getElementById('state');
+            console.log(sl);
+            var url =await fetch("http://localhost:8080/dashboard/tk13_main/get_state");
+
+            var resp = await url.json();
+
+                // .then(resp => resp.json())
+            Object.keys(resp).forEach(key => {
+                Object.keys(resp[key]).forEach(key1 => {
+                    var newOption = new Option(resp[key][key1].name, resp[key][key1].id, false, false);
+                    newOption.setAttribute("name", "statename")
+                    sl.appendChild(newOption);
+
+                })
+            })
+
+        }
+
+        //FOR DISPLAYING CITIES WHEN CLICK ON STATE
+        async function selectcity(id) {
+            var url = await fetch(`http://localhost:8080/dashboard/tk13_main/get_city/?id=${id}`)
+                .then(resp => resp.json())
+            var sl = document.getElementById('city');
+            sl.innerHTML = null;
+
+            Object.keys(url).forEach(key => {
+                Object.keys(url[key]).forEach(key1 => {
+                    var newOption = new Option(url[key][key1].city, url[key][key1].city, false, false);
+                    newOption.setAttribute("name", "cityname[]")
+                    sl.appendChild(newOption);
+                })
+            })
+        }
+
+        //ENABLING RADIO BUTTON OF TECHNOLOGY WHEN WE SELECT CORRESPONDING CHECKBOX
+        function enableradio(check) {
+            const radios = check.closest('tr').querySelectorAll('input[type="radio"]');
+            radios.forEach(radio => {
+                radio.disabled = !check.checked;
+            });
+        }
+
+    </script>
+    </body>
+    </html>

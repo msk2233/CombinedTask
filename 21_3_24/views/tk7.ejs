@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynemic Data Selection</title>
+    <style>
+        body{
+    background-color: lightcoral;
+    color: rgb(9, 69, 62);
+    max-width: 500px;
+    margin: auto;
+    text-align: center;
+}
+.btn{
+    .submit{
+        background-color: cadetblue;
+        color: wheat;
+        font-size: 20px;
+        padding: 10px;
+        border-radius: 10px;
+    }
+    margin-bottom: 20px;
+}
+textarea{
+    background-color: rgb(9, 69, 62);
+    color:wheat;
+    font-size: 15px;
+    font-weight: bold;
+}
+    </style>
+</head>
+
+<body>
+    <h1> SHRUTI MOKARIYA</h1>
+    <form id="form">
+
+        <h2>Enter Your Query Here:</h2>
+        <textarea rows="6" cols="50" type="text" id="query" name="query" required></textarea>
+        <div class="btn">
+            <a class="submit" onclick="submitdata()">GO</a>
+        </div>
+    </form>
+    <script>
+        async function submitdata() {
+            var form = document.getElementById('form');
+            const formData = new URLSearchParams(new FormData(form));
+            var url = "http://localhost:8080/dashboard/tk7/submit"
+            var res1 = await fetch(url, {
+                method: "POST",
+                body: formData,
+                headers: {
+                    "Content-type": "application/x-www-form-urlencoded"
+                }
+            });
+            var response = await res1.json();
+            window.location.href = `http://localhost:8080/dashboard/tk7/display/?qr=${response}&&pgno=1`;
+        }
+    </script>
+</body>
+
+</html>
