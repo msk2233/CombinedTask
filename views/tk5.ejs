@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="/grid_with_cal.css" rel="stylesheet">
+  <h1>Shruti Mokariya</h1>
+  <title>Data Table</title>
+</head>
+
+<body>
+
+  <div class="header">
+    <h1>TABLE DATA</h1>
+  </div>
+  <div class="ff">
+    <select id="sel" class="dd" >
+    <% if (selectedMonth==1) { %>
+      <option value="1" onclick="window.location.href=`/dashboard/tk5/?month=1&pgno=1`" selected>January/24</option>
+      <option value="2" onclick="window.location.href=`/dashboard/tk5/?month=2&pgno=1`">February/24</option>
+      <option value="12" onclick="window.location.href=`/dashboard/tk5/?month=12&pgno=1`">December/23</option>
+  <% } %>
+  <% if (selectedMonth==2) { %>
+    <option value="1" onclick="window.location.href=`/dashboard/tk5/?month=1&pgno=1`">January/24</option>
+    <option value="2" onclick="window.location.href=`/dashboard/tk5/?month=2&pgno=1`" selected>February/24</option>
+    <option value="12" onclick="window.location.href=`/dashboard/tk5/?month=12&pgno=1`">December/23</option>
+  <% } %>
+  <% if (selectedMonth==12) { %>
+    <option value="1" onclick="window.location.href=`/dashboard/tk5/?month=1&pgno=1`">January/24</option>
+    <option value="2" onclick="window.location.href=`/dashboard/tk5/?month=2&pgno=1`">February/24</option>
+    <option value="12" onclick="window.location.href=`/dashboard/tk5/?month=12&pgno=1`" selected>December/23</option>
+  <% } %>
+</select>
+  </div>
+  <table border="1" style="width: 50%;margin: auto;">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>First Name</th>
+        <th>Present Days</th>
+        <th>Percentage</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if (userData.length !=0) {%>
+        <% userData.forEach(function(data, index) { %>
+          <tr>
+            <td>
+              <%= data.stu_id%>
+            </td>
+            <td>
+              <%= data.fname %>
+            </td>
+            <td>
+              <%= data.presentdays %>
+            </td>
+            <td>
+              <%= data.per %> %
+            </td>
+          </tr>
+          <% }); %>
+            <%} %>
+    </tbody>
+  </table>
+
+  <footer>
+    <div class="btns">
+    <%= disabled=null %>
+      <% if(Number(pgno)==1){%>
+        <% disabled="disabled" }%>
+          <button class="btn" id="ltlt" onclick="changepage(1)"  <%= disabled %>  ><a>&lt;&lt;</a></button>
+          <button class="btn" onclick="changepage('<%=Number(pgno)-1%>')"  <%= disabled %>  ><a>&lt;</a></button>
+
+          <a class="a">
+            <%= pgno %>
+          </a>
+
+          <%= Disabled=null %>
+            <% if(Number(pgno)==10){%>
+              <% Disabled="disabled" }%>
+                <button class="btn" onclick="changepage('<%=Number(pgno)+1%>')"  <%= Disabled %> ><a>&gt;</a></button>
+                <button class="btn" onclick="changepage(10)"  <%= Disabled %> ><a>&gt;&gt;</a></button>
+  </div>
+</footer>
+  <script>
+    function changepage(page) {
+      window.location.href = `/dashboard/tk5/?month=<%=selectedMonth %>&pgno=${page}`;
+    }
+  </script>
+</body>
+</html>
