@@ -1,0 +1,47 @@
+body {
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  margin: auto;
+ background-color: rgb(196, 241, 243);
+}
+#regForm{
+  width:1000px;
+  margin: auto;
+}
+table:not(.techtable,.languagetable,.notice) {
+width: 1000px;
+margin: auto;
+font-size: 20px;
+background-color: darkcyan;
+border: 1px solid;
+padding-bottom: 10px;
+}
+
+td {
+  text-align: center;
+  padding-bottom: 2ch;
+}
+
+th {
+  text-align: center;
+  padding-bottom: 3ch;
+}
+footer{
+  .btn{
+      font-size:xx-large;
+      background-color: black;
+      color: wheat
+  }
+  margin: auto;
+}
+#submitbtn{
+  margin-top: 3px;
+  font-size: 25px;
+  background-color: green;
+  color: white;
+}
+.error-message {
+  color: red;
+}
+.required_exp1,.requiredmas,.requiredbech,.requiredhsc,.requiredssc{
+  color: red;
+}

@@ -1,0 +1,44 @@
+body{
+    background-color: blanchedalmond;
+}
+table{
+    background-color: chocolate;
+    color: white;
+}
+td{
+    padding-left:5px;
+    padding-right: 5px;
+}
+.header{
+  
+  background-color: blanchedalmond;
+  h1{
+    max-width: 300px;
+    padding-bottom: 50px;
+    margin: auto;
+  }
+}
+.btns{
+  margin: auto;
+  max-width: 400px;
+  .btn{
+    font-size: 40px;background-color: green;color:white;
+  }
+  a{
+    font-size: 40px;
+    background-color: green;
+    color:white;
+    text-align: center;
+    padding-left:10px;
+    padding-right: 10px;
+  }
+  }
+  .ff{
+    max-width: 200px;
+    margin: auto;
+  }
+.dd{
+  font-size: 20px;
+  background-color: bisque;
+  color: darkcyan;
+}
