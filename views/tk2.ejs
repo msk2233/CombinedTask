@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="wclassth=device-wclassth, initial-scale=1.0">
+    <title>javascript events</title>
+    <style>
+       
+        .def{
+            color: black;  
+            height: 100%;
+            width: 100%;
+        }
+        .abc {
+            color: white;
+            background-color:darkgreen;
+            height: 100%;
+            width: 100%;
+        }
+        table {
+            height: 100%;
+            width: 100%;
+        }
+        td{
+            width: 3cm;
+            height: 3cm;
+        }
+    </style>
+</head>
+<body onpageshow="Onpageshowfunc()">
+
+    <h2>Shruti Mokariya</h2>
+    <!--blur,click,dbl click,focus,ended,focusin,focusout,input,keypress,keyup,mousedown,mouseenter,mouseleave,mouseout,mouseup,reset,submit,load,unload,onchange -->
+    <table  border="2" style="color: grey;scroll-behavior: smooth;" align="center">
+        <tr>
+            <td>
+                <input type="text" class="def" placeholder="onblur" onblur="Onblurfunc()">
+            </td>
+            <td>
+                <input type="text" class="abc" placeholder="onclick" onclick="Onclickfunc()">
+            </td>
+            <td>
+                <input type="text" class="def" placeholder="doubleclk" ondblclick="doubleclickfunc()">
+            </td>
+            <td>
+                <input type="text" class="abc" placeholder="oninput" oninput="Oninputfunc(this)" onfocusout="onfocusout_input(this)">
+            </td>            
+        </tr>
+        <tr>
+            <td>
+                <input type="text" class="abc" placeholder="onfocus" onfocus="Onfocusfunc(this)">
+            </td>
+            <td>
+                <input type="text" class="def" placeholder="onfocusin" onfocusin="Onfocusinfunc()">
+            </td>
+            <td>
+                <input type="text" class="abc" placeholder="onfocusout" onfocusout="Onfocusout(this)">
+            </td>
+            <td>
+                <input type="text" class="def" 
+                placeholder="keypress" onkeypress="Onkeypressfunc(this)">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="text" class="def" placeholder="keyup" onkeyup="Onkeyupfunc(this)">
+            </td>
+            <td>
+                <input type="text" class="abc" placeholder="mousedown"
+                onmousedown="Onmousedownfunc()">
+            </td>
+            <td>
+                <input type="text" class="def" placeholder="mouseenter" onmouseenter="Onmouseenterfunc()">
+            </td>
+            <td>
+                <input type="text" class="abc" placeholder="mouseleave" onmouseleave="Onmouseleavefunc(this)">
+            </td>
+        </tr>
+        <tr>
+                <td>
+                    <input type="text" class="abc" placeholder="mouseout" onmouseout="Onmouseoutfunc(this)">
+                </td>
+                <td>
+                    <input type="text" class="def" placeholder="mouseup"
+                    onmouseup="Onmouseupfunc()">
+                </td>
+                <td>
+                    <form  onreset="Onresetfunc()"  style="height: 100%;width: 100%;"><input type="reset" class="abc" value="reset"></form>
+                    
+                </td>
+                <td>
+                    <form  onsubmit="Onsubmitfunc()" style="height: 100%;width: 100%;"> <input type="submit" class="def" value="submit"></form>
+                </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="text" class="def" placeholder="onchange" onkeyup="Onchangefunc(this)">
+            </td>
+            <td>
+                <input type="text" class="abc" placeholder="oncontextmenu"
+                onmousedown="Oncontextmenufunc()">
+            </td>
+            <td>
+                <input type="text" class="def" placeholder="oncopy" oncopy="Oncopyfunc()">
+            </td>
+            <td>
+                <input type="text" class="abc" placeholder="oncut" oncut="Oncutfunc()">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="text" class="abc" placeholder="ondrag" ondrag="Ondragfunc()">
+            </td>
+            <td>
+                <input type="text" class="def" placeholder="ondragstart"
+                ondragstart="Ondragstartfunc()">
+            </td>
+            <td>
+                <input type="text" class="abc" placeholder="ondragend" ondragend="Ondragendfunc()">
+            </td>
+            <td>
+                <input type="text" class="def" placeholder="ondragenter" ondragenter="Ondragenterfunc()">
+            </td>
+    </tr>
+    <tr>
+        <td>
+            <form  class="def" style="height: fit-content;width: fit-content;"><input type="text"  oninvalid="alert('You must fill out the form!');" required  placeholder="oninvalid event"><br><input type="submit" value="submit" ></form> 
+        </td>
+        <td>
+            <input type="text" class="abc" placeholder="onhover" onhover="Onhoverfunc()" >
+           
+        </td>
+        <td>
+            <input type="text" class="def" placeholder="onpaste" onpaste="Onpastefunc()">
+        </td>
+        <td>
+            <details class="abc" ontoggle="Ontogglefunc()" placeholder="ontoggle">
+        </td>
+    </tr>
+    </table>
+    <script>
+        function Onclickfunc(){
+            alert("this is onclick event");
+        }
+
+        function Onblurfunc(){
+            alert("input field lost focus")
+        }
+
+        function Onfocusfunc(x){
+            x.style.background = "pink";
+        }
+        function Onfocusinfunc() {
+            alert("onfocusin event");
+        }
+        function doubleclickfunc(){
+            alert("double click event occured")
+        }
+        function Onfocusout(x){
+            alert("onfocusout event")
+            x.style.color="pink";
+        }
+        function Oninputfunc(x){
+            x.style.background="blue";
+        }
+        function onfocusout_input(y){
+                y.style.background="black";
+            }
+        function Onkeypressfunc(event){
+            alert("onkeypress event");
+            }
+        function Onkeyupfunc(){
+            alert("onkeyup event")
+        }
+        function Onmousedown(func){
+            alert("onmousedown event")
+        }
+        function Onmouseenterfunc(){
+            alert("onmouseenter event")
+        }
+        function Onmouseleavefunc(){
+            alert("onmouseleave event")
+        }
+        function Onmouseupfunc(){
+            alert("onmouseup event")
+        }
+        function Onmouseoutfunc(){
+            alert("onmouseout event")
+        }
+        function Onsubmitfunc(){
+            alert("onsubmit event")
+        }
+        function Onresetfunc(){
+            alert("onreset event")
+        }
+        function Onchangefunc(){
+            alert("onchange event")
+        }
+       function Oncontextmenufunc(){
+        alert("oncontextmenu event")
+       }
+       function Oncopyfunc(){
+        alert("oncopy event")
+       }
+       function Oncutfunc(){
+        alert("oncut event")
+       }
+       function Ondragfunc(){
+        alert("ondrag event")
+       }
+       function Ondragstartfunc(){
+        alert("ondragstart event")
+       }
+       function Ondragenterfunc(){
+        alert("ondragenter event")
+       }
+       function Ondragendfunc(){
+        alert("ondragend event")
+       }
+       function Onerrorfunc(){
+            alert("onerror event")
+       }
+       function Onpageshowfunc(){
+            alert("onpageshow event")
+       }
+       function Onhoverfunc(){
+        alert("onhover event")
+       }
+       function Onpastefunc(){
+        alert("onpaste event")
+       }
+       function Ontogglefunc(){
+        alert("ontoggle event")
+       }
+    </script>
+
+</body>
+</html>
