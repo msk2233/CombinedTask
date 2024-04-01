@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="/result_grid.css" rel="stylesheet">
+ 
+  <title>Result Report</title>
+</head>
+<body>
+    <div class="header">
+        <h1>Shruti Mokariya</h1>
+        <h1>Result Report</h1>
+    </div>
+    <table border="1" style="width: 50%;margin: auto;">
+        <thead>
+          <tr>
+            <tr>
+                <th>Student id</th>
+                <th>Name</th>
+                <th colspan="2">Prilim</th>
+                <th colspan="2">Terminal</th>
+                <th colspan="2">Final</th>
+                <th rowspan="2">Total Marks</th>
+                <th rowspan="2">View Results in detail</th>
+            </tr>
+            <tr>
+                <th></th>
+                <th></th>
+                <th>Practical</th>
+                <th>Theory</th>
+                <th>Practical</th>
+                <th>Theory</th>
+                <th>Practical</th>
+                <th>Theory</th>
+              </tr>
+        </thead>
+        <tbody>
+           
+          <% if (userData.length !=0) {%>
+            <% userData.forEach(function(data, index) { %>
+              <tr>
+                <td><%= data.stu_id %></td>
+                <td><%= data.fname %></td>
+                <td><%= data.Prilim_practical_total %></td>
+                <td><%= data.Prilim_Theory_total %></td>
+                <td><%= data.Terminal_practical_total %></td>
+                <td><%= data.Terminal_Theory_total %></td>
+                <td><%= data.Final_practical_total %></td>
+                <td><%= data.Final_Theory_total %></td>
+
+                <% totalmarks =  data.Prilim_practical_total+data.Prilim_Theory_total+data.Terminal_practical_total+data.Terminal_Theory_total +data.Final_practical_total+data.Final_Theory_total %>
+
+                <td><%=totalmarks %></td>
+                <td><a href="/dashboard/tk6/detailedresult/?id=<%=data.stu_id%>">View</a></td>
+              </tr>
+              <% }); %>
+                <%} %>
+        </tbody>
+      </table>
+      <footer>
+        <div class="btns">
+        <%= disabled=null %>
+          <% if(Number(pgno)==1){%>
+            <% disabled="disabled" }%>
+              <button class="btn" id="ltlt" onclick="changepage(1)"  <%= disabled %>  ><a>&lt;&lt;</a></button>
+              <button class="btn" onclick="changepage('<%=Number(pgno)-1%>')"  <%= disabled %>  ><a>&lt;</a></button>
+    
+              <a class="a">
+                <%= pgno %>
+              </a>
+    
+              <%= Disabled=null %>
+                <% if(Number(pgno)==10){%>
+                  <% Disabled="disabled" }%>
+                    <button class="btn" onclick="changepage('<%=Number(pgno)+1%>')"  <%= Disabled %> ><a>&gt;</a></button>
+                    <button class="btn" onclick="changepage(10)"  <%= Disabled %> ><a>&gt;&gt;</a></button>
+      </div>
+    </footer>
+    <script>
+        function changepage(page) {
+          window.location.href = `/dashboard/tk6/?pgno=${page}`;
+        }
+      </script>
+</body>
+</html>
