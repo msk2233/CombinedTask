@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="/result_grid.css" rel="stylesheet">
+</head>
+<body>
+    <div class="header">
+        <h3>Student id : <%= id %> </h3>
+        <h3>student_name :  <%= userData[0].fname +' '+ userData[0].lname %></h3>
+    </div>
+
+    <table border="1" style="width: 50%;margin: auto;">
+        <thead>
+            <tr>
+              <tr>
+                  <th>Subject</th>
+                  <th colspan="2">Prilim</th>
+                  <th colspan="2">Terminal</th>
+                  <th colspan="2">Final</th>
+                  <!-- <th rowspan="2">Total Marks</th> -->
+              </tr>
+              <tr>
+                  <th></th>
+                  <th>Practical</th>
+                  <th>Theory</th>
+                  <th>Practical</th>
+                  <th>Theory</th>
+                  <th>Practical</th>
+                  <th>Theory</th>
+                </tr>
+          </thead>
+        <tbody>
+          <% if (userData.length !=0) {%>
+            <% userData.forEach(function(data, index) { %>
+              <tr>
+                <td>
+                    <%= data.sub_name%> 
+                  </td>
+                <td>
+                  <%= data.pp %>
+                </td>
+                <td>
+                  <%= data.pt %>
+                </td>
+                <td>
+                  <%= data.tp %>
+                </td>
+                <td>
+                  <%= data.tt%> 
+                </td>
+                <td>
+                    <%= data.fp%> 
+                  </td>
+                  <td>
+                    <%= data.ft%> 
+                  </td>
+              </tr>
+              <% }); %>
+                <%} %>
+        </tbody>
+      </table>
+      <div class="btns">
+        <button class="btn"><a href='/dashboard/tk6'>Back to main</a>
+        </button>
+      </div>
+</body>
+</html>
