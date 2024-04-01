@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timezone Converter</title>
+    <style>
+        body{
+            width: 500px;
+            margin: auto;
+            background-image: url(abc.jpg);
+        }
+        .con{
+            background-color:rgba(167, 148, 126, 0.5);
+            
+            height: 500px;
+            padding: 20px;
+            border-radius: 50px;
+        }
+        #resultContainer{
+            margin-top: 100px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="con">
+        <h1>Timezone Converter</h1>
+        <form id="timezoneForm">
+            <label for="timezone">Select Timezone:</label>
+            <select id="timezone" name="timezone" onchange="submitdata()">
+                <option>select timezone</option>
+                <% timezones.forEach(timezone=> { %>
+                    <option value="<%= timezone %>">
+                        <%= timezone %>
+                    </option>
+                    <% }) %>
+            </select>
+        </form>
+        <div id="resultContainer"></div>
+    </div>
+
+</body>
+    <script>
+        async function submitdata() { 
+            var tz = document.getElementById('timezone').value;
+            var data = await fetch(`/dashboard/tk15/convert/?timezone=${tz}`);
+            var response = await data.json();
+            document.getElementById('resultContainer').innerHTML = `
+                        <h2>Current Time in ${tz}:</h2>
+                        <p>${response.currentTime}</p>
+                    `;
+        }
+    </script>
+
+</html>
