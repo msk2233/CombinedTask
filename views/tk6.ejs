@@ -4,7 +4,65 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="/result_grid.css" rel="stylesheet">
+  <style>
+    body {
+        font-family: Arial, sans-serif;
+    }
+
+    .header {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    table {
+        width: 90%;
+        margin: 20px auto;
+        border-collapse: collapse;
+    }
+
+    th, td {
+        border: 1px solid #dddddd;
+        padding: 8px;
+        text-align: center;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+
+    tbody tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    .btns {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .btn {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        cursor: pointer;
+        margin: 0 5px;
+    }
+
+    .btn a {
+        text-decoration: none;
+        color: white;
+    }
+
+    .btn:disabled {
+        background-color: #cccccc;
+        cursor: not-allowed;
+    }
+
+    .a {
+        padding: 10px 20px;
+        display: inline-block;
+    }
+</style>
  
   <title>Result Report</title>
 </head>
@@ -13,6 +71,25 @@
         <h1>Shruti Mokariya</h1>
         <h1>Result Report</h1>
     </div>
+    <div>
+      <div class="btns">
+      <%= disabled=null %>
+        <% if(Number(pgno)==1){%>
+          <% disabled="disabled" }%>
+            <button class="btn" id="ltlt" onclick="changepage(1)"  <%= disabled %>  ><a>&lt;&lt;</a></button>
+            <button class="btn" onclick="changepage('<%=Number(pgno)-1%>')"  <%= disabled %>  ><a>&lt;</a></button>
+  
+            <a class="a">
+              <%= pgno %>
+            </a>
+  
+            <%= Disabled=null %>
+              <% if(Number(pgno)==10){%>
+                <% Disabled="disabled" }%>
+                  <button class="btn" onclick="changepage('<%=Number(pgno)+1%>')"  <%= Disabled %> ><a>&gt;</a></button>
+                  <button class="btn" onclick="changepage(10)"  <%= Disabled %> ><a>&gt;&gt;</a></button>
+    </div>
+  </div>
     <table border="1" style="width: 50%;margin: auto;">
         <thead>
           <tr>
@@ -59,25 +136,6 @@
                 <%} %>
         </tbody>
       </table>
-      <footer>
-        <div class="btns">
-        <%= disabled=null %>
-          <% if(Number(pgno)==1){%>
-            <% disabled="disabled" }%>
-              <button class="btn" id="ltlt" onclick="changepage(1)"  <%= disabled %>  ><a>&lt;&lt;</a></button>
-              <button class="btn" onclick="changepage('<%=Number(pgno)-1%>')"  <%= disabled %>  ><a>&lt;</a></button>
-    
-              <a class="a">
-                <%= pgno %>
-              </a>
-    
-              <%= Disabled=null %>
-                <% if(Number(pgno)==10){%>
-                  <% Disabled="disabled" }%>
-                    <button class="btn" onclick="changepage('<%=Number(pgno)+1%>')"  <%= Disabled %> ><a>&gt;</a></button>
-                    <button class="btn" onclick="changepage(10)"  <%= Disabled %> ><a>&gt;&gt;</a></button>
-      </div>
-    </footer>
     <script>
         function changepage(page) {
           window.location.href = `/dashboard/tk6/?pgno=${page}`;
