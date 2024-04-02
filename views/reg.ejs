@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,65 +8,98 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
-<style>
-    #regform {  
-        margin: auto;
-        height: 500px;
-        width: 500px;
-        background-color: rgb(255, 255, 255, 40%);
-        border-radius: 60px;
-
-        .a {
-            font-size: larger;
-            border: 2px solid black;
-            margin-left: 200px;
-        }
-
-        .fname,
-        .email,
-        .pass { 
-            font-weight: bold;
-            margin-bottom: 30px;
-            margin-left: 30px;
-            padding-top: 10px;
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
             display: flex;
-            justify-content: space-between;
-
-            input {
-                margin-right: 200px;
-                font-size: 14px;
-            }
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
         }
-    }
-    .login {
-        position: fixed;
-        bottom: 450px;
-        left: 870px;
-        font-size: larger;
-        color: blue;
-        text-decoration: underline;
-        width: fit-content;
-    }
-    h2{
-        padding-bottom: 30px;
-        padding-top: 30px;
-        text-align: center;
-    }
-</style>
+
+        #regform {
+            background-color: #fff;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 400px;
+        }
+
+        #regform h2 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .input-container {
+            margin-bottom: 20px;
+        }
+
+        .input-container label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .input-container input {
+            width: calc(100% - 10px);
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .input-container input:focus {
+            outline: none;
+            border-color: #007bff;
+        }
+
+        .button-container {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        #submit {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        #link{
+            cursor: pointer;
+        }
+        #submit:hover {
+            background-color: #0056b3;
+        }
+        .login{
+            color: purple;
+            cursor: pointer;
+        }
+    </style>
+</head>
 
 <body id="body">
-    <div class="div">
-        <form id="regform">
-            <h2>Regestration</h2>
-            <div class="fname">NAME: <input type="text" name="fname" id="fname"></div>
-            <div class="email">EMAIL: <input type="text" name="email" id="email"></div>
-            <a class="a" id="submit" onclick="submitdata()" name="register">REGISTER</a>
-            <br>
-            <a onclick="activate()" id="link" style="visibility: hidden;position: relative;top: 50px;"></a>
-            <div id="div"></div>
-            <div class="login" id="login" onclick="login()">LOGIN</div>
-        </form>
-    </div>
+    <form id="regform">
+        <h2>Registration</h2>
+        <div class="input-container">
+            <label for="fname">Name:</label>
+            <input type="text" name="fname" id="fname">
+        </div>
+        <div class="input-container">
+            <label for="email">Email:</label>
+            <input type="text" name="email" id="email">
+        </div>
+        <div class="button-container">
+            <a id="submit" onclick="submitdata()">Register</a>
+        </div>
+        <div class="login" onclick="login()">Already have an account? Login</div>
+        <div id="div" style="margin-top:10px;margin-bottom:10px;"></div>
+        <a onclick="activate()" id="link" style="visibility: hidden;position: relative;top: 10px;"></a>
+    </form>
     <script>
             var input = document.getElementById("body");
         input.addEventListener("keypress", function (event) {
@@ -81,21 +116,20 @@
         var email = document.getElementById('email');
 
         async function submitdata() {
-                if (form[0].value == '' || form[1].value == '') {
-                    fname.style.backgroundColor = "coral";
-                    email.style.backgroundColor = "coral";
-                }
-                else {
-                    var email = form[1].value;
-                    var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-
-                    if (!email.match(mailformat)) {
-                        div.style.color = "red";
-                        div.innerHTML = "Wrong Mail Format";
-                    }
-                    else {
-                        const formData = new URLSearchParams(new FormData(form));
-                        var url = "http://localhost:8080/reg_data"
+            if (form[0].value == '' || form[1].value == '') {
+                fname.style.backgroundColor = "coral";
+                email.style.backgroundColor = "coral";
+            } else {
+                var emailValue = form[1].value;
+                var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+        
+                if (!emailValue.match(mailformat)) {
+                    div.style.color = "red";
+                    div.innerHTML = "Wrong Mail Format";
+                } else {
+                    const formData = new URLSearchParams(new FormData(form));
+                    var url = "http://localhost:8080/reg_data";
+                    try {
                         var res1 = await fetch(url, {
                             method: "POST",
                             body: formData,
@@ -106,19 +140,24 @@
                         var response = await res1.json();
                         if (response.exist == '') {
                             link.innerHTML = 'http://localhost:8080/activate_link/' + response.randomcode;
-                            link.setAttribute("name", response.randomcode)
+                            link.setAttribute("name", response.randomcode);
                             link.style.visibility = "visible";
-                            link.style.color = "blue"
-                        }
-                        else {
+                            link.style.color = "blue";
+                        } else {
                             div.innerHTML = "";
-                            link.innerHTML = 'email already exist please login or use other mail id';
+                            link.innerHTML = 'email already exists. Please login or use another email ID';
                             link.style.visibility = "visible";
-                            link.style.color = "red"
+                            link.style.color = "red";
                         }
+                    } catch (error) {
+                        console.error("Error:", error);
+                        div.innerHTML = "An error occurred while submitting the form.";
+                        div.style.color = "red";
                     }
+                }
             }
         }
+        
 
         async function activate() {
             const email = document.getElementById('email').value;
