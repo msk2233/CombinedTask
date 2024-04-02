@@ -56,25 +56,5 @@ async function insert(query) {
     let result = res.then((result)=>{return result}).catch((err)=>{return err});
     return result;
 }
-var jwt = require('jsonwebtoken');
 
-const auth = (req,res,next)=>{
-    const token = req.cookies.access_token;
-        try{
-
-            const data = jwt.verify(token,"abc");
-            if (data) {
-                next();
-            }
-            else{
-                res.redirect('/login')
-                return;
-            }
-        }
-        catch{
-            res.redirect('/login');
-            return;
-        }  
-}
-module.exports = auth;
 module.exports = {execute,insert};
