@@ -7,65 +7,91 @@
     <title>Document</title>
 </head>
 <style>
-    #loginform {
-        margin: auto;
-        height: 500px;
-        width: 500px;
-        background-color: rgb(255, 255, 255, 40%);
-        border-radius: 60px;
-
-        .a {
-            font-size: larger;
-            border: 2px solid black;
-            margin-left: 200px;
-        }
-
-        .email,
-        .pass {
-            font-weight: bold;
-            margin-bottom: 30px;
-            margin-left: 30px;
-            padding-top: 10px;
-            display: flex;
-            justify-content: space-between;
-
-            input {
-                margin-right: 200px;
-                font-size: 14px;
-            }
-        }
-
-        .login {
-            position: fixed;
-            bottom: 450px;
-            left: 840px;
-            font-size: larger;
-            color: blue;
-            text-decoration: underline;
-            width: fit-content;
-        }
-
-        h2 {
-            padding-bottom: 30px;
-            padding-top: 30px;
-            text-align: center;
-        }
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
     }
+
+    #loginform {
+        background-color: #fff;
+        border-radius: 20px;
+        padding: 40px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        width: 400px;
+    }
+
+    #loginform h2 {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .input-container {
+        margin-bottom: 20px;
+    }
+
+    .input-container label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    .input-container input {
+        width: calc(100% - 10px);
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+    }
+
+    .input-container input:focus {
+        outline: none;
+        border-color: #007bff;
+    }
+
+    .button-container {
+        text-align: center;
+    }
+
+    #submit {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    #submit:hover {
+        background-color: #0056b3;
+    }
+
 </style>
+</head>
 
 <body id="body">
-    <div class="div">
-        <form id="loginform">
-            <h2>LOGIN</h2>
-            <div class="email">EMAIL: <input type="text" name="email" id="email"></div>
-            <div class="pass" id="pass">PASSWORD: <input type="text" name="password" id="password"></div>
-            <a class="a" id="submit" onclick="submitdata()" name="register">LOGIN</a>
-            <br>
-            <a id="link" style="visibility: hidden;position: relative;top: 50px;"></a>
-            <div id="div"></div>
-            <div class="login" id="login" onclick="registration()">REGISTRATION</div>
-        </form>
+<form id="loginform">
+    <h2>Login</h2>
+    <div class="input-container">
+        <label for="email">Email:</label>
+        <input type="text" name="email" id="email">
     </div>
+    <div class="input-container">
+        <label for="password">Password:</label>
+        <input type="password" name="password" id="password">
+    </div>
+    <div class="button-container">
+        <a id="submit" onclick="submitdata()">Login</a>
+    </div>
+    <div class="reg" onclick="registration()"> Register </div>
+    <div id="div"  style="margin-top:10px;margin-bottom:10px;"></div>
+    <a id="link" style="visibility: hidden;position: relative;top: 10px;"></a>
+</form>
     <script>
         var input = document.getElementById("body");
         input.addEventListener("keypress", function (event) {
