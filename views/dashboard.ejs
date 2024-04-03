@@ -3,48 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Dashboard</title>
     <style>
-        body{
-            background-color: rgb(21, 170, 170);
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f6fc; /* Light Blue */
+            margin: 0;
+            padding: 0;
         }
-        .div{
-            width: 500px;
-            margin: auto;
-            background-color: antiquewhite;
-            padding: 10px;
-            border-radius: 10px;
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #ffffff; /* White */
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
-        .a{
-            display: flex;
-            margin-bottom: 20px;
+
+        .div {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .a {
+            display: block;
             padding: 10px;
-            width: fit-content;
-            background-color: rosybrown;
-            border: 2px solid black;
-            border-radius: 20px;
+            background-color: #cce4f6; /* Light Blue */
+            border-radius: 5px;
+            text-align: center;
+            text-decoration: none;
+            color: #1e75e6; /* Dark Blue */
+            transition: background-color 0.3s ease;
+        }
+
+        .a:hover {
+            background-color: #b3d8f3; /* Lighter Blue */
         }
     </style>
 </head>
 <body>
-    <div class="div">
+    <div class="container">
         <h1>All the Tasks</h1>
-        <a class="a" target="_blank" href="/dashboard/tk1">Dynemic Table</a>
-        <a class="a" target="_blank" href="/dashboard/tk2">Javascript Events</a>
-        <a class="a" target="_blank" href="/dashboard/tk3">KuKu Cube</a>
-        <a class="a" target="_blank" href="/dashboard/tk4">Static Grind</a>
-        <a class="a" target="_blank" href="/dashboard/tk5">Grid With Calender</a>
-        <a class="a" target="_blank" href="/dashboard/tk6">Result Grid</a>
-        <a class="a" target="_blank" href="/dashboard/tk7">Dynemic Grind</a>
-        <a class="a" target="_blank" href="/dashboard/tk8">Searching</a>
-        <a class="a" target="_blank" href="/dashboard/tk9">Delimiter Searching</a>
-        <a class="a" target="_blank" href="/dashboard/tk10">CSS Template 1</a>
-        <a class="a" target="_blank" href="/dashboard/tk11">CSS Template 2</a>
-        <a class="a" target="_blank" href="/dashboard/tk12">CSS Template 3</a>
-        <a class="a" target="_blank" href="/dashboard/tk13">CRUD of Job application</a>
-        <!-- <a class="a" target="_blank" href="/dashboard/tk14">CRUD of Job application By AJAX</a> -->
-        <a class="a" target="_blank" href="/dashboard/tk15">TimeZone Converter</a>
-        <a class="a" target="_blank" href="/dashboard/tk16">JSON placeholder API</a>
+        <div class="div">
+            <a class="a" target="_blank" href="/dashboard/dynemictable">Dynamic Table</a>
+            <a class="a" target="_blank" href="/dashboard/Javascript_Events">Javascript Events</a>
+            <a class="a" target="_blank" href="/dashboard/KuKucube">KuKu Cube</a>
+            <a class="a" target="_blank" href="/dashboard/staticgrid">Static Grid</a>
+            <a class="a" target="_blank" href="/dashboard/Grid_With_Calendar">Grid With Calendar</a>
+            <a class="a" target="_blank" href="/dashboard/result">Result Grid</a>
+            <a class="a" target="_blank" href="/dashboard/dynemicgrid_main">Dynamic Grid</a>
+            <a class="a" target="_blank" href="/dashboard/Searching">Searching</a>
+            <a class="a" target="_blank" href="/dashboard/Delimitersearch">Delimiter Searching</a>
+            <a class="a" target="_blank" href="/dashboard/ehya_tamplate">CSS Template 1</a>
+            <a class="a" target="_blank" href="/dashboard/Awan_Hoster_template">CSS Template 2</a>
+            <a class="a" target="_blank" href="/dashboard/hirex_tamplate">CSS Template 3</a>
+            <a class="a" target="_blank" href="/dashboard/job_application_form">CRUD of Job Application</a>
+            <a class="a" target="_blank" href="/dashboard/tk14">CRUD of Job Application By AJAX</a>
+            <a class="a" target="_blank" href="/dashboard/timezone">Time Zone Converter</a>
+            <a class="a" target="_blank" href="/dashboard/jsonplaceholder">Json Plcaeholder Api</a>
+        </div>
     </div>
 </body>
 </html>

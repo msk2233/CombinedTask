@@ -4,7 +4,65 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link href="/result_grid.css" rel="stylesheet">
+    <style>
+      body {
+          font-family: Arial, sans-serif;
+      }
+  
+      .header {
+          text-align: center;
+          margin-bottom: 20px;
+      }
+  
+      table {
+          width: 90%;
+          margin: 20px auto;
+          border-collapse: collapse;
+      }
+  
+      th, td {
+          border: 1px solid #dddddd;
+          padding: 8px;
+          text-align: center;
+      }
+  
+      th {
+          background-color: #f2f2f2;
+      }
+  
+      tbody tr:nth-child(even) {
+          background-color: #f2f2f2;
+      }
+  
+      .btns {
+          text-align: center;
+          margin-top: 20px;
+      }
+  
+      .btn {
+          background-color: #4CAF50;
+          color: white;
+          padding: 10px 20px;
+          border: none;
+          cursor: pointer;
+          margin: 0 5px;
+      }
+  
+      .btn a {
+          text-decoration: none;
+          color: white;
+      }
+  
+      .btn:disabled {
+          background-color: #cccccc;
+          cursor: not-allowed;
+      }
+  
+      .a {
+          padding: 10px 20px;
+          display: inline-block;
+      }
+  </style>
 </head>
 <body>
     <div class="header">
@@ -63,7 +121,7 @@
         </tbody>
       </table>
       <div class="btns">
-        <button class="btn"><a href='/dashboard/tk6'>Back to main</a>
+        <button class="btn"><a href='/dashboard/result'>Back to main</a>
         </button>
       </div>
 </body>

@@ -130,7 +130,7 @@
                 <% totalmarks =  data.Prilim_practical_total+data.Prilim_Theory_total+data.Terminal_practical_total+data.Terminal_Theory_total +data.Final_practical_total+data.Final_Theory_total %>
 
                 <td><%=totalmarks %></td>
-                <td><a href="/dashboard/tk6/detailedresult/?id=<%=data.stu_id%>">View</a></td>
+                <td><a href="/dashboard/Result/detailedresult/?id=<%=data.stu_id%>">View</a></td>
               </tr>
               <% }); %>
                 <%} %>
@@ -138,7 +138,7 @@
       </table>
     <script>
         function changepage(page) {
-          window.location.href = `/dashboard/tk6/?pgno=${page}`;
+          window.location.href = `/dashboard/result/?pgno=${page}`;
         }
       </script>
 </body>

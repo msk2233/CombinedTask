@@ -76,33 +76,33 @@
   <% disabled=null %>
   <% if(Number(number)==1){%>
   <% disabled="disabled" }%>
-  <button class="btn" id="ltlt" onclick="window.location.href='/dashboard/tk4/?pgno=1&srno=<%= srno %>'" <%= disabled %> ><a>&lt;&lt;</a></button>
-  <button class="btn" onclick="window.location.href='/dashboard/tk4/?pgno=<%= Number(number)-1 %>&srno=<%= srno %>'" <%= disabled %> ><a>&lt;</a></button>
+  <button class="btn" id="ltlt" onclick="window.location.href='/dashboard/staticgrid/?pgno=1&srno=<%= srno %>'" <%= disabled %> ><a>&lt;&lt;</a></button>
+  <button class="btn" onclick="window.location.href='/dashboard/staticgrid/?pgno=<%= Number(number)-1 %>&srno=<%= srno %>'" <%= disabled %> ><a>&lt;</a></button>
 
   <a class="a"><%= number %></a>
 
   <%= Disabled=null %>
   <% if(Number(number)==250){%>
   <% Disabled="disabled" }%>
-  <button class="btn" onclick="window.location.href='/dashboard/tk4/?pgno=<%= Number(number)+1 %>&srno=<%= srno %> '" <%= Disabled %>><a>&gt;</a></button>
-  <button class="btn" onclick="window.location.href='/dashboard/tk4/?pgno=250&srno=<%= srno %>'" <%= Disabled %>><a>&gt;&gt;</a></button>
+  <button class="btn" onclick="window.location.href='/dashboard/staticgrid/?pgno=<%= Number(number)+1 %>&srno=<%= srno %> '" <%= Disabled %>><a>&gt;</a></button>
+  <button class="btn" onclick="window.location.href='/dashboard/staticgrid/?pgno=250&srno=<%= srno %>'" <%= Disabled %>><a>&gt;&gt;</a></button>
 </div>
 
 <table border="1">
   <thead>
       <tr>
-          <th><a href="/dashboard/tk4/?pgno=1&srno=stu_id">ID</a></th>
-          <th><a href="/dashboard/tk4/?pgno=1&srno=fname">First Name</a></th>
-          <th><a href="/dashboard/tk4/?pgno=1&srno=lname">Last Name</a></th>
-          <th><a href="/dashboard/tk4/?pgno=1&srno=email">Email</a></th>
-          <th><a href="/dashboard/tk4/?pgno=1&srno=email2">Email2</a></th>
-          <th><a href="/dashboard/tk4/?pgno=1&srno=Designation">Designation</a></th>
-          <th><a href="/dashboard/tk4/?pgno=1&srno=City">City</a></th>
-          <th><a href="/dashboard/tk4/?pgno=1&srno=Country">Country</a></th>
-          <th><a href="/dashboard/tk4/?pgno=1&srno=Phonenum">Phone number</a></th>
-          <th><a href="/dashboard/tk4/?pgno=1&srno=Gender">Gender</a></th>
-          <th><a href="/dashboard/tk4/?pgno=1&srno=zipcode">zipcode</a></th>
-          <th><a href="/dashboard/tk4/?pgno=1&srno=createdTime">createdTime</a></th>
+          <th><a href="/dashboard/staticgrid/?pgno=1&srno=stu_id">ID</a></th>
+          <th><a href="/dashboard/staticgrid/?pgno=1&srno=fname">First Name</a></th>
+          <th><a href="/dashboard/staticgrid/?pgno=1&srno=lname">Last Name</a></th>
+          <th><a href="/dashboard/staticgrid/?pgno=1&srno=email">Email</a></th>
+          <th><a href="/dashboard/staticgrid/?pgno=1&srno=email2">Email2</a></th>
+          <th><a href="/dashboard/staticgrid/?pgno=1&srno=Designation">Designation</a></th>
+          <th><a href="/dashboard/staticgrid/?pgno=1&srno=City">City</a></th>
+          <th><a href="/dashboard/staticgrid/?pgno=1&srno=Country">Country</a></th>
+          <th><a href="/dashboard/staticgrid/?pgno=1&srno=Phonenum">Phone number</a></th>
+          <th><a href="/dashboard/staticgrid/?pgno=1&srno=Gender">Gender</a></th>
+          <th><a href="/dashboard/staticgrid/?pgno=1&srno=zipcode">zipcode</a></th>
+          <th><a href="/dashboard/staticgrid/?pgno=1&srno=createdTime">createdTime</a></th>
       </tr>
   </thead>
   <tbody>

@@ -82,19 +82,19 @@
   <div class="ff">
     <select id="sel" class="dd" >
     <% if (selectedMonth==1) { %>
-      <option value="1" onclick="window.location.href=`/dashboard/tk5/?month=1&pgno=1`" selected>January/24</option>
-      <option value="2" onclick="window.location.href=`/dashboard/tk5/?month=2&pgno=1`">February/24</option>
-      <option value="12" onclick="window.location.href=`/dashboard/tk5/?month=12&pgno=1`">December/23</option>
+      <option value="1" onclick="window.location.href=`/dashboard/Grid_With_Calendar/?month=1&pgno=1`" selected>January/24</option>
+      <option value="2" onclick="window.location.href=`/dashboard/Grid_With_Calendar/?month=2&pgno=1`">February/24</option>
+      <option value="12" onclick="window.location.href=`/dashboard/Grid_With_Calendar/?month=12&pgno=1`">December/23</option>
   <% } %>
   <% if (selectedMonth==2) { %>
-    <option value="1" onclick="window.location.href=`/dashboard/tk5/?month=1&pgno=1`">January/24</option>
-    <option value="2" onclick="window.location.href=`/dashboard/tk5/?month=2&pgno=1`" selected>February/24</option>
-    <option value="12" onclick="window.location.href=`/dashboard/tk5/?month=12&pgno=1`">December/23</option>
+    <option value="1" onclick="window.location.href=`/dashboard/Grid_With_Calendar/?month=1&pgno=1`">January/24</option>
+    <option value="2" onclick="window.location.href=`/dashboard/Grid_With_Calendar/?month=2&pgno=1`" selected>February/24</option>
+    <option value="12" onclick="window.location.href=`/dashboard/Grid_With_Calendar/?month=12&pgno=1`">December/23</option>
   <% } %>
   <% if (selectedMonth==12) { %>
-    <option value="1" onclick="window.location.href=`/dashboard/tk5/?month=1&pgno=1`">January/24</option>
-    <option value="2" onclick="window.location.href=`/dashboard/tk5/?month=2&pgno=1`">February/24</option>
-    <option value="12" onclick="window.location.href=`/dashboard/tk5/?month=12&pgno=1`" selected>December/23</option>
+    <option value="1" onclick="window.location.href=`/dashboard/Grid_With_Calendar/?month=1&pgno=1`">January/24</option>
+    <option value="2" onclick="window.location.href=`/dashboard/Grid_With_Calendar/?month=2&pgno=1`">February/24</option>
+    <option value="12" onclick="window.location.href=`/dashboard/Grid_With_Calendar/?month=12&pgno=1`" selected>December/23</option>
   <% } %>
 </select>
   </div>
@@ -150,7 +150,7 @@
 </footer>
   <script>
     function changepage(page) {
-      window.location.href = `/dashboard/tk5/?month=<%=selectedMonth %>&pgno=${page}`;
+      window.location.href = `/dashboard/Grid_With_Calendar/?month=<%=selectedMonth %>&pgno=${page}`;
     }
   </script>
 </body>

@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,78 +6,81 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
 
-        #regform {
-            background-color: #fff;
-            border-radius: 20px;
-            padding: 40px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 400px;
-        }
+    #regform {
+        background-color: #fff;
+        border-radius: 20px;
+        padding: 40px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        width: 400px;
+    }
 
-        #regform h2 {
-            text-align: center;
-            margin-bottom: 30px;
-        }
+    #regform h2 {
+        text-align: center;
+        margin-bottom: 30px;
+    }
 
-        .input-container {
-            margin-bottom: 20px;
-        }
+    .input-container {
+        margin-bottom: 20px;
+    }
 
-        .input-container label {
-            display: block;
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
+    .input-container label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
 
-        .input-container input {
-            width: calc(100% - 10px);
-            padding: 10px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-        }
+    .input-container input {
+        width: calc(100% - 10px);
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+    }
 
-        .input-container input:focus {
-            outline: none;
-            border-color: #007bff;
-        }
+    .input-container input:focus {
+        outline: none;
+        border-color: #007bff;
+    }
 
-        .button-container {
-            text-align: center;
-            margin-bottom: 15px;
-        }
+    .button-container {
+        text-align: center;
+        margin-bottom: 15px;
+    }
 
-        #submit {
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-        #link{
-            cursor: pointer;
-        }
-        #submit:hover {
-            background-color: #0056b3;
-        }
-        .login{
-            color: purple;
-            cursor: pointer;
-        }
-    </style>
+    #submit {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    #link {
+        cursor: pointer;
+    }
+
+    #submit:hover {
+        background-color: #0056b3;
+    }
+
+    .login {
+        color: purple;
+        cursor: pointer;
+    }
+</style>
 </head>
 
 <body id="body">
@@ -101,13 +102,13 @@
         <a onclick="activate()" id="link" style="visibility: hidden;position: relative;top: 10px;"></a>
     </form>
     <script>
-            var input = document.getElementById("body");
+        var input = document.getElementById("body");
         input.addEventListener("keypress", function (event) {
             if (event.key === "Enter") {
                 submitdata();
             }
         });
-        
+
         var div = document.getElementById('div');
         var link = document.getElementById('link');
         var submit = document.getElementById('submit');
@@ -122,13 +123,13 @@
             } else {
                 var emailValue = form[1].value;
                 var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-        
+
                 if (!emailValue.match(mailformat)) {
                     div.style.color = "red";
                     div.innerHTML = "Wrong Mail Format";
                 } else {
                     const formData = new URLSearchParams(new FormData(form));
-                    var url = "http://localhost:8080/reg_data";
+                    var url = `${location.origin}/reg_data`;
                     try {
                         var res1 = await fetch(url, {
                             method: "POST",
@@ -139,7 +140,7 @@
                         });
                         var response = await res1.json();
                         if (response.exist == '') {
-                            link.innerHTML = 'http://localhost:8080/activate_link/' + response.randomcode;
+                            link.innerHTML = `${location.origin}/activate_link/` + response.randomcode;
                             link.setAttribute("name", response.randomcode);
                             link.style.visibility = "visible";
                             link.style.color = "blue";
@@ -157,12 +158,10 @@
                 }
             }
         }
-        
-
         async function activate() {
             const email = document.getElementById('email').value;
             var code = document.getElementById('link').name;
-            var url = await fetch(`http://localhost:8080/activate_link/?code=${code}&email=${email}`);
+            var url = await fetch(`${location.origin}/activate_link/?code=${code}&email=${email}`);
 
             var response = await url.json();
             if (response.code == '') {
@@ -180,7 +179,7 @@
         }
 
         function login() {
-            window.location.href=`login`;
+            window.location.href = `login`;
         }
     </script>
 </body>

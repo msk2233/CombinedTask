@@ -46,7 +46,7 @@ textarea{
         async function submitdata() {
             var form = document.getElementById('form');
             const formData = new URLSearchParams(new FormData(form));
-            var url = "http://localhost:8080/dashboard/tk7/submit"
+            var url = `${location.origin}/dashboard/dynemicgrid_main/submit`
             var res1 = await fetch(url, {
                 method: "POST",
                 body: formData,
@@ -55,7 +55,7 @@ textarea{
                 }
             });
             var response = await res1.json();
-            window.location.href = `http://localhost:8080/dashboard/tk7/display/?qr=${response}&&pgno=1`;
+            window.location.href = `${location.origin}/dashboard/dynemicgrid_main/display/?qr=${response}&&pgno=1`;
         }
     </script>
 </body>

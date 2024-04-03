@@ -56,7 +56,7 @@ th{
                 <% Disabled="disabled" }%>
                   <button type="submit" class="btn" onclick="changepage('<%=Number(pgno)+1%>')" <%=Disabled %>
                     ><a>&gt;</a></button>
-                  <button type="submit" class="btn" onclick="changepage(360)" <%=Disabled %> ><a>&gt;&gt;</a></button>
+                  <button type="submit" class="btn" onclick="changepage('<%= length %>')" <%=Disabled %> ><a>&gt;&gt;</a></button>
     </div>
     <%}%>
 
@@ -87,7 +87,7 @@ th{
   <script>
     function changepage(page) {
       Page = Number(page);
-      window.location.href = `/dashboard/tk7/display?qr=<%=query%>&pgno=${Page}`;
+      window.location.href = `/dashboard/dynemicgrid_main/display?qr=<%=query%>&pgno=${Page}`;
     }
   </script>
 </body>

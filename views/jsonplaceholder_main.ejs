@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynemic table using api</title>
+    <!-- <script src="../public/script.js"></script> -->
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th,
+        button {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .btn{
+            background-color: #4CAF50;
+            color: white;
+            font-size: 30px;
+           
+        }
+        #pagination{
+            max-width: fit-content;
+            margin: auto;
+        }
+        span{
+            font-size: 20px;
+            .inp{
+                width: 600px;
+                border: solid 2px #207722;
+                
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <h2>SHRUTI MOKARIYA</h2>
+    <div style="padding-bottom: 20px;" id="pagination"></div>
+    <span>Search <input class="inp" type="text" id="inp" onkeyup="search()"></span>
+    <div id="table-container"></div>
+    <script>
+        let response;
+        (async function(){
+            response = await fetch('https://jsonplaceholder.typicode.com/posts');
+            response = await response.json();
+            generateTable(1)
+        })()        
+        async function generateTable(pgno) {
+            var Data = response;
+            //for pagination
+
+            len = Object.keys(Data).length;
+            dataperpage = 10;
+            totalpage = Math.ceil(len / dataperpage);
+            var data = Data.slice((pgno - 1) * 10, pgno * 10);
+
+            let table = '<table>';
+            // print th
+            table += '<tr>'
+            for (key in data[0]) {
+                table += `<th> ${key} </th>`;
+            }
+            table += '</tr>'
+
+            //print td
+            for (dt of data) {
+                table += '<tr>'
+
+                for (key in data[0]) {
+                    table += `<td> ${dt[key]} </td>`;
+                }
+                table += `<td><button onclick="view(${dt.id})"> VIEW MORE </button></td>`;
+                table += '</tr>'
+            }
+            table += '</table>';
+            const tableContainer = document.getElementById('table-container');
+            //append data to table
+            tableContainer.innerHTML = table;
+
+            //condition for disabling button
+            disabled = null
+            if (pgno == 1) {
+                disabled = "disabled";
+            }
+            Disabled = null
+            if (pgno == totalpage) {
+                Disabled = "disabled"
+            }
+
+            //buttons for pagination
+            let bt1 = `<button class="btn" id="ltlt" onclick="changepage(1)" ${disabled} > << </button>`;
+            let bt2 = `<button class="btn" onclick="changepage(${pgno}-1)" ${disabled}> < </button>`
+            let page = `<span> ${pgno} </span>`;
+            let bt3 = `<button class="btn" onclick="changepage(${pgno}+1)" ${Disabled}> > </button>`
+            let bt4 = `<button class="btn" onclick="changepage(${totalpage})" ${Disabled}> >>  </button>`
+
+            const pg = document.getElementById('pagination');
+            pg.innerHTML = bt1 + bt2 + page + bt3 + bt4;
+
+        }
+
+        function search() {
+            var srh = document.getElementById('inp').value;
+            async function searchdata() {
+                const data = response;
+                arr = [];
+                data.forEach(function (items) {
+                    if (items.id.toString().includes(srh) || items.title.toString().includes(srh) || items.body.toString().includes(srh)) {
+                        arr.push(items);
+                        // console.log(arr);
+                        let table = '<table>';
+                        // print th
+                        table += '<tr>'
+                        for (key in arr[0]) {
+                            table += `<th> ${key} </th>`;
+                        }
+                        table += '</tr>'
+
+                        //print td
+                        for (dt of arr) {
+                            table += '<tr>'
+
+                            for (key in arr[0]) {
+                                table += `<td> ${dt[key]} </td>`;
+                            }
+                            table += `<td><button onclick="view(${dt.id})"> VIEW MORE </button></td>`;
+                            table += '</tr>'
+                        }
+                        table += '</table>';
+                        const tableContainer = document.getElementById('table-container');
+                        //append data to table
+                        tableContainer.innerHTML = table;
+                    }
+                });
+            }
+            searchdata();
+        }
+        function changepage(page) {
+            generateTable(page);
+        }
+        function view(id) {
+            window.location.href = `/dashboard/jsonplaceholder/?id=${id}`;
+        }
+    </script>
+</body>
+</html>
