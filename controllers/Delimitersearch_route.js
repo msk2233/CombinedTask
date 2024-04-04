@@ -1,3 +1,4 @@
+
 const { execute } = require('../executequery');
 exports.tk9route_main=async (req,res)=>{
     let qr = '';
@@ -7,8 +8,10 @@ exports.tk9route_main=async (req,res)=>{
 }
 exports.tk9route_display =async (req, res) => {
     qr = req.body.str;
-    str = JSON.stringify(qr);
-    let x = [];
+    let str = JSON.stringify(qr);
+    str = str.replace( /\s+/g, '' );
+   
+    let arr = [];
     let temp = "";
     for (let i = 1; i < str.length - 1; i++) {
         const c = str.charAt(i);
@@ -17,14 +20,14 @@ exports.tk9route_display =async (req, res) => {
         }
         else {
             if (temp !== "") {
-                x.push(temp);
+                arr.push(temp);
                 temp = "";
             }
-            x.push(c);
+            arr.push(c);
         }
     }
     if (temp !== "") {
-        x.push(temp);
+        arr.push(temp);
     }
     let fn =[];
     let ln =[];
@@ -33,22 +36,22 @@ exports.tk9route_display =async (req, res) => {
     let city=[];
     for (i = 0; i < str.length - 1; i++) {
         if (i % 2 == 0) {
-            let op = x[i];
+            let op = arr[i];
             switch (op) {
                 case '_':
-                    fn.push(x[i+1])
+                    fn.push(arr[i+1])
                     break;
                 case '^':
-                    ln.push(x[i+1])
+                    ln.push(arr[i+1])
                     break;
                 case '$':
-                    mail.push(x[i+1])
+                    mail.push(arr[i+1])
                     break;
                 case '{':
-                    phno.push(x[i+1])
+                    phno.push(arr[i+1])
                     break;
                 case ':':
-                    city.push(x[i+1])
+                    city.push(arr[i+1])
                     break;
             }
         }

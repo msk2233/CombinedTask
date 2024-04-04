@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+
+    #forgotpass {
+        background-color: #fff;
+        border-radius: 20px;
+        padding: 40px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        width: 400px;
+    }
+
+    #forgotpass h2 {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .input-container {
+        margin-bottom: 20px;
+    }
+
+    .input-container label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    .input-container input {
+        width: calc(100% - 10px);
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+    }
+
+    .input-container input:focus {
+        outline: none;
+        border-color: #007bff;
+    }
+
+    .button-container {
+        text-align: center;
+    }
+    .button-container2 {
+        margin-top: 30px;
+        text-align: center;
+    }
+    #submit {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+#check{
+    background-color: #007bff;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+}
+    #submit:hover {
+        background-color: #0056b3;
+    }
+</style>
+</head>
+
+<body id="body">
+<form id="forgotpass">
+    <h2>Reset Password</h2>
+    <div class="input-container">
+        <label for="email">Email:</label>
+        <input type="text" name="email" id="email">
+    </div>
+    <div class="input-container">
+        <label for="friendname">Friend Name:</label>
+        <input type="text" name="friendname" id="friendname">
+    </div>
+    <div id="newpass" class="input-container" style="display:none;">
+        <label for="password">New Password:</label>
+        <input type="password" name="password" id="password">
+    </div>
+    <div class="button-container" >
+        <a id="submit" onclick="reset()" style="display:none;">Reset</a>
+    </div>
+    <div class="button-container2">
+        <a id="check" onclick="check()">verify</a>
+    </div>
+    <div id="suc"></div>
+</form>
+<script>
+    let friendname = document.getElementById('friendname').value;
+    let email = document.getElementById('email').value;
+    let newpass = document.getElementById('password');
+    async function check() {
+        let check = await fetch(`${location.origin}/forgotpass/check/?email=${email}&&frname=${friendname}`);
+        check = await check.json();
+        if (check == 'true') {
+            console.log(document.getElementById('submit'));
+            document.getElementById('submit').style.display = "block";
+            document.getElementById('check').style.display = "none";
+            document.getElementById('newpass').style.display = "block";
+        }
+    }
+    async function reset() {
+        let reset = await fetch(`${location.origin}/reset/?newpass=${newpass}&&email=${email}&&frname=${friendname}`);
+        reset = await reset.json();
+        if (reset == 'yes') {
+            document.getElementById('suc').innerHTML = "password has been reset";
+        }
+    }
+</script>
+</body>
+</html>

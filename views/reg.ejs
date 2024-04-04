@@ -94,6 +94,10 @@
             <label for="email">Email:</label>
             <input type="text" name="email" id="email">
         </div>
+        <div class="input-container">
+            <label for="ukdetail">Friend Name(for password forget):</label>
+            <input type="text" name="ukdetail" id="ukdetail">
+        </div>
         <div class="button-container">
             <a id="submit" onclick="submitdata()">Register</a>
         </div>
@@ -115,11 +119,13 @@
         var form = document.getElementById('regform');
         var fname = document.getElementById('fname');
         var email = document.getElementById('email');
+        var ukdetail = document.getElementById('ukdetail')
 
         async function submitdata() {
-            if (form[0].value == '' || form[1].value == '') {
+            if (form[0].value == '' || form[1].value == '' || form[2].value == '') {
                 fname.style.backgroundColor = "coral";
                 email.style.backgroundColor = "coral";
+                ukdetail.style.backgroundColor = "coral";
             } else {
                 var emailValue = form[1].value;
                 var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;

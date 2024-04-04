@@ -20,7 +20,6 @@
         tr{
             padding: 1cm;
         }
-      
         td{
             padding: 1cm;
         }
@@ -30,12 +29,9 @@
             height: 2cm;
             width: 2cm;
         }
-
    </style>
 </head>
-<body style="padding: 1cm;">
-    <h2>SHRUTI MOKARIYA</h2>
-        
+<body style="padding: 1cm;">     
     <div>
         <input class="btn" type="button" value="add row" onclick="Addrow()">
         <input class="btn" type="button" value="sub row" onclick="Subrow()">
@@ -44,7 +40,6 @@
         <input class="btn" type="button" value="add col" onclick="Addcol()">
         <input class="btn" type="button" value="sub col" onclick="Subcol()">
     </div>
-   
                     <table id="tb" border="2">
                         <tr id="tr">
                             <td></td>
@@ -55,15 +50,10 @@
                             <td></td>
                         </tr>
                     </table>
-                
-                   
-
-    
         <script>
             function Addrow(){
                let tb = document.getElementById("tb");
-               var row = tb.insertRow(tb.rows.length);
-               
+               let row = tb.insertRow(tb.rows.length);
                 for(i=0;i<tb.rows[0].cells.length;i++){
                     row.insertCell(i)
                 }

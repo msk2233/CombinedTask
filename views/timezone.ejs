@@ -44,9 +44,9 @@
 </body>
     <script>
         async function submitdata() { 
-            var tz = document.getElementById('timezone').value;
-            var data = await fetch(`/dashboard/timezone/converted_timezone/?timezone=${tz}`);
-            var response = await data.json();
+            let tz = document.getElementById('timezone').value;
+            let data = await fetch(`/dashboard/timezone/converted_timezone/?timezone=${tz}`);
+            let response = await data.json();
             document.getElementById('resultContainer').innerHTML = `
                         <h2>Current Time in ${tz}:</h2>
                         <p>${response.currentTime}</p>

@@ -34,7 +34,6 @@ table{
   </style>
 </head>
 <body>
-  <h1>SHRUTI MOKARIYA</h1>
   <div id="form1">
     <div>
         <h3>Search by student id</h3>
@@ -135,20 +134,20 @@ table{
     </table>
   </div>
         <script>
-           var h ="hidden";
-           var v = "visible";
+           let hid ="hidden";
+           let vis = "visible";
            const form1 = document.getElementById('form1');
            const form2 = document.getElementById('form2');
-          var count = 0;
+          let count = 0;
           function change() {
             count++;
             if(count%2 != 0){
-              form2.style.visibility = v;
-              form1.style.visibility = h;
+              form2.style.visibility = vis;
+              form1.style.visibility = hid;
             }
             else{
-              form1.style.visibility = v;
-              form2.style.visibility = h;
+              form1.style.visibility = vis;
+              form2.style.visibility = hid;
             }
           }
         </script>

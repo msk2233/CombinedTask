@@ -1,131 +1,168 @@
-
-
 <html>
 <style>
-  body {
-      font-family: Arial, sans-serif;
-      background-color: #f3f3f3;
-      margin: 0;
-      padding: 0;
-  }
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f3f3f3;
+        margin: 0;
+        padding: 0;
+    }
 
-  .header {
-      text-align: center;
-      margin-top: 20px;
-      margin-bottom: 20px;
-  }
+    .header {
+        text-align: center;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
 
-  .header h1 {
-      color: #333;
-  }
+    .header h1 {
+        color: #333;
+    }
 
-  .btn {
-      background-color: #007bff;
-      color: #fff;
-      border: none;
-      padding: 10px 15px;
-      border-radius: 5px;
-      cursor: pointer;
-      text-decoration: none;
-      margin: 0 5px;
-  }
+    .btn {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 5px;
+        cursor: pointer;
+        text-decoration: none;
+        margin: 0 5px;
+    }
 
-  .btn a {
-      color: #fff;
-      text-decoration: none;
-  }
+    .btn a {
+        color: #fff;
+        text-decoration: none;
+    }
 
-  .btn:hover {
-      background-color: #0056b3;
-  }
+    .btn:hover {
+        background-color: #0056b3;
+    }
 
-  table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 20px;
-      background-color: #fff;
-      border-radius: 5px;
-  }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+        background-color: #fff;
+        border-radius: 5px;
+    }
 
-  th,
-  td {
-      padding: 10px;
-      border: 1px solid #ddd;
-      text-align: left;
-  }
+    th,
+    td {
+        padding: 10px;
+        border: 1px solid #ddd;
+        text-align: left;
+    }
 
-  th {
-      background-color: #007bff;
-      color: #fff;
-  }
+    th {
+        background-color: #007bff;
+        color: #fff;
+    }
 
-  th a {
-      color: #fff;
-      text-decoration: none;
-  }
+    th a {
+        color: #fff;
+        text-decoration: none;
+    }
 
-  tbody tr:nth-child(even) {
-      background-color: #f2f2f2;
-  }
+    tbody tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    .btn:disabled {
+        background-color: #cccccc;
+        cursor: not-allowed;
+    }
 </style>
 </head>
 
 <body>
-<div class="header">
-  <h1>TABLE DATA</h1>
-  <% disabled=null %>
-  <% if(Number(number)==1){%>
-  <% disabled="disabled" }%>
-  <button class="btn" id="ltlt" onclick="window.location.href='/dashboard/staticgrid/?pgno=1&srno=<%= srno %>'" <%= disabled %> ><a>&lt;&lt;</a></button>
-  <button class="btn" onclick="window.location.href='/dashboard/staticgrid/?pgno=<%= Number(number)-1 %>&srno=<%= srno %>'" <%= disabled %> ><a>&lt;</a></button>
+    <div class="header">
+        <h1>TABLE DATA</h1>
+        <% disabled=null %>
+            <% if(Number(pgno)==1){%>
+                <% disabled="disabled" }%>
+                    <button class="btn" id="ltlt"
+                        onclick="window.location.href='/dashboard/staticgrid/?pgno=1&srno=<%= srno %>'" <%=disabled %>
+                        ><a>&lt;&lt;</a></button>
+                    <button class="btn"
+                        onclick="window.location.href='/dashboard/staticgrid/?pgno=<%= Number(pgno)-1 %>&srno=<%= srno %>'"
+                        <%=disabled %> ><a>&lt;</a></button>
 
-  <a class="a"><%= number %></a>
+                    <a class="a">
+                        <%= pgno %>
+                    </a>
 
-  <%= Disabled=null %>
-  <% if(Number(number)==250){%>
-  <% Disabled="disabled" }%>
-  <button class="btn" onclick="window.location.href='/dashboard/staticgrid/?pgno=<%= Number(number)+1 %>&srno=<%= srno %> '" <%= Disabled %>><a>&gt;</a></button>
-  <button class="btn" onclick="window.location.href='/dashboard/staticgrid/?pgno=250&srno=<%= srno %>'" <%= Disabled %>><a>&gt;&gt;</a></button>
-</div>
+                    <%= Disabled=null %>
+                        <% if(Number(pgno)==250){%>
+                            <% Disabled="disabled" }%>
+                                <button class="btn"
+                                    onclick="window.location.href='/dashboard/staticgrid/?pgno=<%= Number(pgno)+1 %>&srno=<%= srno %> '"
+                                    <%=Disabled %>><a>&gt;</a></button>
+                                <button class="btn"
+                                    onclick="window.location.href='/dashboard/staticgrid/?pgno=250&srno=<%= srno %>'"
+                                    <%=Disabled %>><a>&gt;&gt;</a></button>
+    </div>
 
-<table border="1">
-  <thead>
-      <tr>
-          <th><a href="/dashboard/staticgrid/?pgno=1&srno=stu_id">ID</a></th>
-          <th><a href="/dashboard/staticgrid/?pgno=1&srno=fname">First Name</a></th>
-          <th><a href="/dashboard/staticgrid/?pgno=1&srno=lname">Last Name</a></th>
-          <th><a href="/dashboard/staticgrid/?pgno=1&srno=email">Email</a></th>
-          <th><a href="/dashboard/staticgrid/?pgno=1&srno=email2">Email2</a></th>
-          <th><a href="/dashboard/staticgrid/?pgno=1&srno=Designation">Designation</a></th>
-          <th><a href="/dashboard/staticgrid/?pgno=1&srno=City">City</a></th>
-          <th><a href="/dashboard/staticgrid/?pgno=1&srno=Country">Country</a></th>
-          <th><a href="/dashboard/staticgrid/?pgno=1&srno=Phonenum">Phone number</a></th>
-          <th><a href="/dashboard/staticgrid/?pgno=1&srno=Gender">Gender</a></th>
-          <th><a href="/dashboard/staticgrid/?pgno=1&srno=zipcode">zipcode</a></th>
-          <th><a href="/dashboard/staticgrid/?pgno=1&srno=createdTime">createdTime</a></th>
-      </tr>
-  </thead>
-  <tbody>
-      <% if (userData.length != 0) {%>
-      <% userData.forEach(function(data, index) { %>
-      <tr>
-          <td><%= data.stu_id%></td>
-          <td><%= data.fname %></td>
-          <td><%= data.lname %></td>
-          <td><%= data.email %></td>
-          <td><%= data.email2 %></td>
-          <td><%= data.Designation %></td>
-          <td><%= data.City%></td>
-          <td><%= data.Country %></td>
-          <td><%= data.Phonenum%></td>
-          <td><%= data.Gender%></td>
-          <td><%= data.zipcode%></td>
-          <td><%= data.createdTime%></td>
-      </tr>
-      <% }); %>
-      <%} %>
-  </tbody>
-</table>
+    <table border="1">
+        <thead>
+            <tr>
+                <th><a href="/dashboard/staticgrid/?pgno=1&srno=stu_id">ID</a></th>
+                <th><a href="/dashboard/staticgrid/?pgno=1&srno=fname">First Name</a></th>
+                <th><a href="/dashboard/staticgrid/?pgno=1&srno=lname">Last Name</a></th>
+                <th><a href="/dashboard/staticgrid/?pgno=1&srno=email">Email</a></th>
+                <th><a href="/dashboard/staticgrid/?pgno=1&srno=email2">Email2</a></th>
+                <th><a href="/dashboard/staticgrid/?pgno=1&srno=Designation">Designation</a></th>
+                <th><a href="/dashboard/staticgrid/?pgno=1&srno=City">City</a></th>
+                <th><a href="/dashboard/staticgrid/?pgno=1&srno=Country">Country</a></th>
+                <th><a href="/dashboard/staticgrid/?pgno=1&srno=Phonenum">Phone pgno</a></th>
+                <th><a href="/dashboard/staticgrid/?pgno=1&srno=Gender">Gender</a></th>
+                <th><a href="/dashboard/staticgrid/?pgno=1&srno=zipcode">zipcode</a></th>
+                <th><a href="/dashboard/staticgrid/?pgno=1&srno=createdTime">createdTime</a></th>
+            </tr>
+        </thead>
+        <tbody>
+            <% if (userData.length !=0) {%>
+                <% userData.forEach(function(data, index) { %>
+                    <tr>
+                        <td>
+                            <%= data.stu_id%>
+                        </td>
+                        <td>
+                            <%= data.fname %>
+                        </td>
+                        <td>
+                            <%= data.lname %>
+                        </td>
+                        <td>
+                            <%= data.email %>
+                        </td>
+                        <td>
+                            <%= data.email2 %>
+                        </td>
+                        <td>
+                            <%= data.Designation %>
+                        </td>
+                        <td>
+                            <%= data.City%>
+                        </td>
+                        <td>
+                            <%= data.Country %>
+                        </td>
+                        <td>
+                            <%= data.Phonenum%>
+                        </td>
+                        <td>
+                            <%= data.Gender%>
+                        </td>
+                        <td>
+                            <%= data.zipcode%>
+                        </td>
+                        <td>
+                            <%= data.createdTime%>
+                        </td>
+                    </tr>
+                    <% }); %>
+                        <%} %>
+        </tbody>
+    </table>
 </body>
 
 </html>

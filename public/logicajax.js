@@ -22,6 +22,7 @@ function showTab(n) {
 
 function nextPrev(n) {
   var x = document.getElementsByClassName("tab");
+  validateForm();
   if (n != 1 && !validateForm()) {
     return false;
   }

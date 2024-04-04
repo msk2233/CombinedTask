@@ -70,7 +70,13 @@
     #submit:hover {
         background-color: #0056b3;
     }
-
+    .footer{
+        display: flex;
+       justify-content: space-between;
+       padding-top: 25px;
+        color: purple;
+        cursor: pointer;
+    }
 </style>
 </head>
 
@@ -88,7 +94,10 @@
     <div class="button-container">
         <a id="submit" onclick="submitdata()">Login</a>
     </div>
-    <div class="reg" onclick="registration()"> Register </div>
+    <div class="footer">
+        <div class="reg" onclick="registration()"> Register </div>
+        <div class="forgotpass" onclick="forgot()">Forgot Password</div>
+    </div>
     <div id="div"  style="margin-top:10px;margin-bottom:10px;"></div>
     <a id="link" style="visibility: hidden;position: relative;top: 10px;"></a>
 </form>
@@ -133,6 +142,9 @@
         }
         function registration() {
             window.location.href = "/"
+        }
+        function forgot() {
+            window.location.href = `/forgotpass`
         }
     </script>
 </body>

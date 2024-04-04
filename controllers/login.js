@@ -37,3 +37,22 @@ exports.login_data = async (req, res) => {
         res.json({ success: "no" })
     }
 }
+exports.dataforpass = async (req, res) => {
+    let forpass = `select email,detailforpass from registration`;
+    let datapass = await execute(forpass);
+    for (let i = 0; i < datapass.length; i++) {
+        if (datapass[i].email == req.query.email && datapass[i].detailforpass == req.query.frname) {
+            console.log("true");
+            res.json("true")
+        }
+    }
+}
+exports.reset = async (req, res) => {
+    let mail = req.query.email;
+    let newpass = req.query.newpass
+    var salt = Math.round((Math.pow(36, 5) - Math.random() * Math.pow(36, 4))).toString(36).slice(1);
+    var encodedpass = MD5(newpass + salt);
+    var pass_query = `update registration set reg_password='${encodedpass}',salt = '${salt}',active_status=1 where email='${mail}'`;
+    await execute(pass_query);
+    res.json("yes")
+}

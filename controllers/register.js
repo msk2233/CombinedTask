@@ -1,9 +1,10 @@
 const { execute } = require('../executequery');
+var MD5 = require('md5');
 exports.registerpage = async (req, res) => {
     res.render('reg');
 }
 exports.register=async (req,res)=> {
-    const { fname, email } = req.body;
+    const { fname, email ,ukdetail } = req.body;
     var checkmail = `select email from registration`;
     var check_mail = await execute(checkmail);
     var status = `select active_status from registration`;
@@ -20,7 +21,8 @@ exports.register=async (req,res)=> {
     }
     else {
         var randomcode = Math.round((Math.pow(36, 13) - Math.random() * Math.pow(36, 12))).toString(36).slice(1);
-        var fr_query = `insert into registration(fname,email,activation_code,active_status) values ('${fname}','${email}','${randomcode}',0)`;
+        var fr_query = `insert into registration(fname,email,detailforpass,activation_code,active_status) values ('${fname}','${email}','${ukdetail}','${randomcode}',0)`;
+        console.log(fr_query);
         await execute(fr_query);
         res.json({ randomcode, exist })
     }

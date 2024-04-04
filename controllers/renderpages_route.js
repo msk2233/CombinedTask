@@ -20,3 +20,6 @@ exports.Awan_Hoster_template= async (req,res)=>{
 exports.hirex_tamplate= async (req,res)=>{
     res.sendFile(path.join(__dirname, '../public/temp_3/assignment_3.html'));
 }
+exports.forgotpass= async (req,res)=>{;
+    res.render('forgotpass')
+}

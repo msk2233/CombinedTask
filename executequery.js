@@ -1,6 +1,6 @@
 var mysql = require('mysql')
 
-async function execute(query) {
+async function execute(query,values) {
     var con = mysql.createConnection({
         host: "localhost",
         user: "root",
@@ -15,9 +15,8 @@ async function execute(query) {
     });
 
     let res = new Promise((resolve, reject) => {
-        con.query(query, (err, result) => {
+        con.query(query,values, (err, result) => {
             if (err) {
-                console.log(err);
                 reject(err);
             }
             else {

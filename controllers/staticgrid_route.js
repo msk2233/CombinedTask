@@ -1,100 +1,88 @@
 
 const { execute } = require('../executequery');
 
-exports.tk4route=async (req,res)=> { 
-var pgno = parseInt(req.query.pgno) || '1';
-var srno = req.query.srno || 'stu_id'; 
-if(pgno == 1 || pgno == 0){
-  pgno = 1;
-  str =0;
-}
-else{
-  var str = (pgno-1)*200;
-}   
-var number = pgno;
-switch (srno) {
-  case 'stu_id':
-      var sqldis = `SELECT * FROM student_master order by stu_id limit ${str},200`;
-      data = await execute(sqldis)
-        res.render('staticgrid', { title: 'User List',userData: data,number:number,srno:srno});
-    break;
+exports.tk4route = async (req, res) => {
+  let pgno = parseInt(req.query.pgno) || '1';
+  let srno = req.query.srno || 'stu_id';
+  let lim = 0;
+  if (pgno != 1) {
+    lim = (pgno - 1) * 200;
+  }
+  values = [lim];
+  let sqldis = '';
+  switch (srno) {
+    case 'stu_id':
+      sqldis = `SELECT * FROM student_master order by stu_id limit ?,200`;
+      data = await execute(sqldis, values)
+      res.render('staticgrid', { title: 'User List', userData: data, pgno: pgno, srno: srno });
+      break;
     case 'fname':
-      var sqldis = `SELECT * FROM student_master order by fname limit ${str},200`;
-       data = await execute(sqldis)
-      
-        res.render('staticgrid', { title: 'User List',userData: data,number:number,srno:srno}); 
-    break;
+      sqldis = `SELECT * FROM student_master order by fname limit ?,200`;
+      data = await execute(sqldis, values)
+      res.render('staticgrid', { title: 'User List', userData: data, pgno: pgno, srno: srno });
+      break;
     case 'lname':
-      var sqldis = `SELECT * FROM student_master order by lname limit ${str},200`;
-       data = await execute(sqldis)
-      
-        res.render('staticgrid', { title: 'User List',userData: data,number:number,srno:srno}); 
-    break;
+      sqldis = `SELECT * FROM student_master order by lname limit ?,200`;
+      data = await execute(sqldis, values)
+      res.render('staticgrid', { title: 'User List', userData: data, pgno: pgno, srno: srno });
+      break;
     case 'email':
-      var sqldis = `SELECT * FROM student_master order by email limit ${str},200`;
-       data = await execute(sqldis)
-      con.query(sqldis,(err,data) => {
-        res.render('staticgrid', { title: 'User List',userData: data,number:number,srno:srno});
-      }); 
-    break;
-    case 'email2':
-      var sqldis = `SELECT * FROM student_master order by email2 limit ${str},200`;
-       data = await execute(sqldis)
-      
-        res.render('staticgrid', { title: 'User List',userData: data,number:number,srno:srno}); 
-      case 'Designation':
-        var sqldis = `SELECT * FROM student_master order by Designation limit ${str},200`;
-         data = await execute(sqldis)
-        
-          res.render('staticgrid', { title: 'User List',userData: data,number:number,srno:srno});
- 
-      break;
-      case 'City':
-        var sqldis = `SELECT * FROM student_master order by City limit ${str},200`;
-         data = await execute(sqldis)
-        
-          res.render('staticgrid', { title: 'User List',userData: data,number:number,srno:srno});
- 
-      break;
-      case 'Country':
-        var sqldis = `SELECT * FROM student_master order by Country limit ${str},200`;
-        
-          res.render('staticgrid', { title: 'User List',userData: data,number:number,srno:srno});
- 
-      break;
-      case 'Phonenum':
-        var sqldis = `SELECT * FROM student_master order by Phonenum limit ${str},200`;
-         data = await execute(sqldis)
-        
-          res.render('staticgrid', { title: 'User List',userData: data,number:number,srno:srno});
- 
-      break; 
-      case 'Gender':
-        var sqldis = `SELECT * FROM student_master order by Gender limit ${str},200`;
-         data = await execute(sqldis)
-        
-          res.render('staticgrid', { title: 'User List',userData: data,number:number,srno:srno});
- 
-      break;
-      case 'zipcode':
-        var sqldis = `SELECT * FROM student_master order by zipcode limit ${str},200`;
-         data = await execute(sqldis)
-        
-          res.render('staticgrid', { title: 'User List',userData: data,number:number,srno:srno});
- 
-      break;
-      case 'createdTime':
-        var sqldis = `SELECT * FROM student_master order by createdTime limit ${str},200`;
-         data = await execute(sqldis)
-        
-          res.render('staticgrid', { title: 'User List',userData: data,number:number,srno:srno});
- 
-      break;
-  default:
-     sqldis = `SELECT * FROM student_master limit ${str},200`;
+      sqldis = `SELECT * FROM student_master order by email limit ?,200`;
       data = await execute(sqldis)
-    
-      res.render('staticgrid', { title: 'User List',userData: data,number:number,srno:srno}) 
-    break;
-}
+      con.query(sqldis, (err, data) => {
+      res.render('staticgrid', { title: 'User List', userData: data, pgno: pgno, srno: srno });
+      });
+      break;
+    case 'email2':
+      sqldis = `SELECT * FROM student_master order by email2 limit ?,200`;
+      data = await execute(sqldis, values)
+      res.render('staticgrid', { title: 'User List', userData: data, pgno: pgno, srno: srno });
+
+    case 'Designation':
+      sqldis = `SELECT * FROM student_master order by Designation limit ?,200`;
+      data = await execute(sqldis, values)
+      res.render('staticgrid', { title: 'User List', userData: data, pgno: pgno, srno: srno });
+      break;
+
+    case 'City':
+      sqldis = `SELECT * FROM student_master order by City limit ?,200`;
+      data = await execute(sqldis, values)
+      res.render('staticgrid', { title: 'User List', userData: data, pgno: pgno, srno: srno });
+      break;
+
+    case 'Country':
+      sqldis = `SELECT * FROM student_master order by Country limit ?,200`;
+      res.render('staticgrid', { title: 'User List', userData: data, pgno: pgno, srno: srno });
+      break;
+
+    case 'Phonenum':
+      sqldis = `SELECT * FROM student_master order by Phonenum limit ?,200`;
+      data = await execute(sqldis, values)
+      res.render('staticgrid', { title: 'User List', userData: data, pgno: pgno, srno: srno });
+      break;
+
+    case 'Gender':
+      sqldis = `SELECT * FROM student_master order by Gender limit ?,200`;
+      data = await execute(sqldis, values)
+      res.render('staticgrid', { title: 'User List', userData: data, pgno: pgno, srno: srno });
+      break;
+
+    case 'zipcode':
+      sqldis = `SELECT * FROM student_master order by zipcode limit ?,200`;
+      data = await execute(sqldis, values)
+      res.render('staticgrid', { title: 'User List', userData: data, pgno: pgno, srno: srno });
+      break;
+
+    case 'createdTime':
+      sqldis = `SELECT * FROM student_master order by createdTime limit ?,200`;
+      data = await execute(sqldis, values)
+      res.render('staticgrid', { title: 'User List', userData: data, pgno: pgno, srno: srno });
+      break;
+
+    default:
+      sqldis = `SELECT * FROM student_master limit ?,200`;
+      data = await execute(sqldis, values)
+      res.render('staticgrid', { title: 'User List', userData: data, pgno: pgno, srno: srno })
+      break;
+  }
 }

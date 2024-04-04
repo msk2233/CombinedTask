@@ -2,7 +2,7 @@
 const { execute } = require('../executequery');
 exports.tk15route= async (req,res)=>{
     timezones = [];
-    var qr = `select timezone from timezone`;
+    let qr = `select timezone from timezone`;
     data = await execute(qr);
         for (let i = 0; i < data.length; i++) {
             timezones.push(data[i].timezone)
