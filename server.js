@@ -5,7 +5,7 @@ app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: true }));
 
 app.use('/',router);
-const port = 5050;
+const port = 8080;
 
 app.listen(port, () => {
     console.log(`Server listening at http://localhost:${port}`);

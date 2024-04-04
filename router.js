@@ -11,7 +11,7 @@ let tk7 = require('./controllers/dynemicgrid_route.js')
 let tk8 = require('./controllers/Searching_route.js')
 let tk9 = require('./controllers/Delimitersearch_route.js')
 let tk13 = require('./controllers/job_application_form_route.js')
-let tk14 = require('./controllers/tk14_route.js')
+let tk14 = require('./controllers/ajaxform_route.js')
 let tk15 = require('./controllers/timezone_route.js')
 let tk16 = require('./controllers/jsonplaceholder_route.js')
 let reg = require('./controllers/register.js')
@@ -52,43 +52,14 @@ app.get('/fetch', auth, tk13.fetch)
 app.post('/dashboard/job_application_form_main/update', auth, tk13.updatedata)
 app.get('/dashboard/job_application_form_main/get_state', auth, tk13.get_state);
 app.get('/dashboard/job_application_form_main/get_city', auth, tk13.get_city);
-
-app.get('/dashboard/tk14', auth, (req, res) => {
-    res.render('tk14_main')
-})
-app.get('/dashboard/tk14_main/tk14_newform', auth, (req, res) => {
-    tk14.insert(req, res);
-})
-app.post('/dashboard/tk14_main/post_data', auth, (req, res) => {
-    tk14.backend(req, res)
-    if (tk14.backend(req, res)) {
-        tk14.insdata(req, res);
-    }
-    else {
-        res.json(fail);
-    }
-})
-app.get('/dashboard/tk14_main/tk14_updateform', auth, (req, res, next) => {
-    tk14.update(req, res, next);
-})
-app.get('/fetch', auth, async (req, res) => {
-    tk14.fetch(req, res);
-})
-app.post('/dashboard/tk14_main/update', auth, (req, res) => {
-    tk14.backend(req, res)
-    if (tk14.backend(req, res)) {
-        tk14.updatedata(req, res);
-    }
-    else {
-        res.json(fail);
-    }
-})
-app.get('/dashboard/tk14_main/get_state', auth, async function (req, res) {
-    tk14.get_state(req, res);
-});
-app.get('/dashboard/tk14_main/get_city', auth, async function (req, res) {
-    tk14.get_city(req, res);
-});
+app.get('/dashboard/ajax', auth,tk14.main )
+app.get('/dashboard/ajax_main/ajax_newform', auth, tk14.insert)
+app.post('/dashboard/ajax_main/post_data', auth,tk14.insdata)
+app.get('/dashboard/ajax_main/ajax_updateform', auth, tk14.update)
+app.get('/fetch', auth,tk14.fetch )
+app.post('/dashboard/ajax_main/update', auth,tk14.updatedata)
+app.get('/dashboard/ajax_main/get_state', auth,tk14.get_state);
+app.get('/dashboard/ajax_main/get_city', auth,  tk14.get_city);
 app.get('/dashboard/timezone', auth, tk15.tk15route);
 app.get('/dashboard/timezone/converted_timezone', auth, tk15.tk15route_convert);
 app.get('/dashboard/jsonplaceholder', auth, tk16.tk16route);

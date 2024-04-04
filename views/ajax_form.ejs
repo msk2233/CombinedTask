@@ -371,14 +371,13 @@
         var submittype = '<%= submittype %>';
 
         var id = '<%= id %>'
-        console.log(submittype);
         var currentTab = 0; // Current tab is set to be the first tab (0)
         showTab(currentTab); // Display the current tab
 
         if (submittype == 'update') {
             document.getElementById('id').value = id;
             async function func1(id) {
-                var url = await fetch(`http://localhost:5000/fetch/?id=${id}`)
+                var url = await fetch(`${location.origin}/fetch/?id=${id}`)
                     .then(resp => resp.json())
                
                     //BASIC DETAIL
@@ -423,8 +422,6 @@
                     document.getElementById('tage_mas').value = url.result2[3].percentage;
 
                     //WORK EXPERIENCE 
-
-                    console.log((url.result3));
                     document.getElementById('companyname1').value = url.result3[0].ComapanyName;
                     document.getElementById('designation_exp1').value = url.result3[0].Designation;
                     document.getElementById('date_of_join_exp1').value = url.result3[0].Dateofjoining;
