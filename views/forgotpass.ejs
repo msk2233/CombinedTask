@@ -56,10 +56,12 @@
     .button-container {
         text-align: center;
     }
+
     .button-container2 {
         margin-top: 30px;
         text-align: center;
     }
+
     #submit {
         background-color: #007bff;
         color: #fff;
@@ -69,15 +71,17 @@
         cursor: pointer;
         transition: background-color 0.3s ease;
     }
-#check{
-    background-color: #007bff;
+
+    #check {
+        background-color: #007bff;
         color: #fff;
         border: none;
         padding: 10px 20px;
         border-radius: 5px;
         cursor: pointer;
         transition: background-color 0.3s ease;
-}
+    }
+
     #submit:hover {
         background-color: #0056b3;
     }
@@ -85,49 +89,80 @@
 </head>
 
 <body id="body">
-<form id="forgotpass">
-    <h2>Reset Password</h2>
-    <div class="input-container">
-        <label for="email">Email:</label>
-        <input type="text" name="email" id="email">
-    </div>
-    <div class="input-container">
-        <label for="friendname">Friend Name:</label>
-        <input type="text" name="friendname" id="friendname">
-    </div>
-    <div id="newpass" class="input-container" style="display:none;">
-        <label for="password">New Password:</label>
-        <input type="password" name="password" id="password">
-    </div>
-    <div class="button-container" >
-        <a id="submit" onclick="reset()" style="display:none;">Reset</a>
-    </div>
-    <div class="button-container2">
-        <a id="check" onclick="check()">verify</a>
-    </div>
-    <div id="suc"></div>
-</form>
-<script>
-    let friendname = document.getElementById('friendname').value;
-    let email = document.getElementById('email').value;
-    let newpass = document.getElementById('password');
-    async function check() {
-        let check = await fetch(`${location.origin}/forgotpass/check/?email=${email}&&frname=${friendname}`);
-        check = await check.json();
-        if (check == 'true') {
-            console.log(document.getElementById('submit'));
-            document.getElementById('submit').style.display = "block";
-            document.getElementById('check').style.display = "none";
-            document.getElementById('newpass').style.display = "block";
+    <form id="forgotpass">
+        <h2>Reset Password</h2>
+        <div class="input-container">
+            <label for="email">Email:</label>
+            <input type="text" name="email" id="email">
+        </div>
+        <div class="input-container">
+            <label for="friendname">Friend Name:</label>
+            <input type="text" name="friendname" id="friendname">
+        </div>
+        <div id="newpass" class="input-container" style="display:none;">
+            <label for="password">New Password:</label>
+            <input type="password" name="password" id="password">
+        </div>
+        <div id="confirmpass" class="input-container" style="display:none;">
+            <label for="confirmpass">Conform Password:</label>
+            <input type="password" name="conpassword" id="conpassword">
+        </div>
+        <div class="button-container">
+            <a id="submit" onclick="reset()" style="display:none;">Reset</a>
+        </div>
+        <div class="button-container2">
+            <a id="check" onclick="check()">verify</a>
+        </div>
+        <div id="suc" style="display: none;">
+        </div>
+    </form>
+    <script>
+        async function check() {
+            let friendname = document.getElementById('friendname').value;
+            let email = document.getElementById('email').value;
+            let check = await fetch(`${location.origin}/forgotpass/check?email=${email}&&frname=${friendname}`);
+            check = await check.json();
+            if (check) {
+                document.getElementById('submit').style.display = "block";
+                document.getElementById('check').style.display = "none";
+                document.getElementById('newpass').style.display = "block";
+                document.getElementById('confirmpass').style.display = "block";
+            }
         }
-    }
-    async function reset() {
-        let reset = await fetch(`${location.origin}/reset/?newpass=${newpass}&&email=${email}&&frname=${friendname}`);
-        reset = await reset.json();
-        if (reset == 'yes') {
-            document.getElementById('suc').innerHTML = "password has been reset";
+        async function reset() {
+            let friendname = document.getElementById('friendname').value;
+            let email = document.getElementById('email').value;
+            let newpass = document.getElementById('password').value;
+            let conpass = document.getElementById('conpassword').value;
+            let suc = document.getElementById('suc');
+            if (newpass == conpass) {
+                let reset = await fetch(`${location.origin}/reset/?newpass=${newpass}&&email=${email}&&frname=${friendname}`);
+                reset = await reset.json();
+
+
+                if (reset == 'yes') {
+                    suc.innerHTML = '';
+                    const spannode = document.createElement("span");
+                    const text = document.createTextNode("password has been reset");
+                    spannode.appendChild(text);
+                    suc.appendChild(spannode);
+
+                    var aTag = document.createElement('a');
+                    aTag.setAttribute('href', "login");
+                    aTag.innerText = "login";
+                    suc.appendChild(aTag);
+                    suc.appendChild(spannode);
+                    suc.style.display = "block";
+                }
+            }
+            else {
+                let err = document.createTextNode("enter coerrect password")
+                suc.appendChild(err);
+                suc.style.color = "red";
+                suc.style.display = "block";
+            }
         }
-    }
-</script>
+    </script>
 </body>
+
 </html>

@@ -1,8 +1,6 @@
 let express = require("express");
 let app = require("express").Router();
 app.use(express.static('public'));
-let cookieParser = require('cookie-parser');
-app.use(cookieParser());
 let auth = require('./middlewear/authentication.js');
 let tk4 = require('./controllers/staticgrid_route.js')
 let tk5 = require('./controllers/Grid_With_Calendar_route.js')
@@ -66,4 +64,5 @@ app.get('/dashboard/ajax_main/get_city', auth,  tk14.get_city);
 app.get('/dashboard/timezone', auth, tk15.tk15route);
 app.get('/dashboard/timezone/converted_timezone', auth, tk15.tk15route_convert);
 app.get('/dashboard/jsonplaceholder', auth, tk16.tk16route);
+app.get('*',rend.err);
 module.exports = app;

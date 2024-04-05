@@ -23,3 +23,6 @@ exports.hirex_tamplate= async (req,res)=>{
 exports.forgotpass= async (req,res)=>{;
     res.render('forgotpass')
 }
+exports.err = async(req,res)=>{
+    res.render('err');
+}
