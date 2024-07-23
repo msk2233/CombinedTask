@@ -64,5 +64,6 @@ app.get('/dashboard/ajax_main/get_city', auth,  tk14.get_city);
 app.get('/dashboard/timezone', auth, tk15.tk15route);
 app.get('/dashboard/timezone/converted_timezone', auth, tk15.tk15route_convert);
 app.get('/dashboard/jsonplaceholder', auth, tk16.tk16route);
+app.get('/dashboard/tictaetoe', auth, rend.TicTaeToe);
 app.get('*',rend.err);
 module.exports = app;

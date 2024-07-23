@@ -255,7 +255,10 @@ exports.insdata = async (req, res, next) => {
         }
 
         //INSERT INTO KNOWN PREFERENCE TABLE
-        const Location = location.toString();
+        let Location="";
+        if (location) {    
+            Location = location.toString();
+        }
         var preference = `insert into preferences(application_id,prefered_location,notice_period,expected_ctc,curr_ctc,department) values(${insertedid},'${Location}','${notice_period}','${exp_ctc}','${cur_ctc}','${department}');`;
 
         let data7 = await execute(preference);

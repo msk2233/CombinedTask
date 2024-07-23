@@ -3,8 +3,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
 <link href="/form.css" rel="stylesheet">
-<script src="/frontendvalidation.js"></script>
 <script src="/job_form_script.js"></script>
+
 <body onload="state()">
     <div class="response">
         <h1 id="response"></h1>
@@ -174,35 +174,39 @@
                     <td id="td_companyname1"> Company name <input type="text" name="companyname1" id="companyname1">
                         <span class="required_exp1"></span>
                     </td>
-                    <td id="td_designation_exp1"> Designation <input type="text" name="designation_exp1" id="designation_exp1">
+                    <td id="td_designation_exp1"> Designation <input type="text" name="designation_exp1"
+                            id="designation_exp1">
                         <span class="required_exp1"></span>
                     </td>
-                    <td id="td_date_of_join_exp1"> From <input type="text" name="date_of_join_exp1" id="date_of_join_exp1">
+                    <td id="td_date_of_join_exp1"> From <input type="text" name="date_of_join_exp1"
+                            id="date_of_join_exp1">
                         <span class="required_exp1"></span>
                     </td>
-                    <td id="td_date_of_coplition_exp1"> To <input type="text" name="date_of_coplition_exp1" id="date_of_coplition_exp1">
+                    <td id="td_date_of_coplition_exp1"> To <input type="text" name="date_of_coplition_exp1"
+                            id="date_of_coplition_exp1">
                         <span class="required_exp1"></span>
                     </td>
                 </tr>
                 <tr>
-                    <td id="td_companyname2"> Company name <input type="text" name="companyname2" id="companyname2"> <span
-                            class="required_exp2" style="margin-left: 5px;"></span></td>
-                    <td id="td_designation_exp2"> Designation <input type="text" name="designation_exp2" id="designation_exp2"> <span
-                            class="required_exp2" style="margin-left: 5px;"></span></td>
-                    <td  id="td_date_of_join_exp2"> From <input type="text" id="date_of_join_exp2" name="date_of_join_exp2"> <span
-                            class="required_exp2" style="margin-left: 5px;"></span></td>
-                    <td id="td_date_of_coplition_exp2"> To <input type="text" id="date_of_coplition_exp2" name="date_of_coplition_exp2"> <span
-                            class="required_exp2" style="margin-left: 5px;"></span>
+                    <td id="td_companyname2"> Company name <input type="text" name="companyname2" id="companyname2">
+                        <span class="required_exp2" style="margin-left: 5px;"></span></td>
+                    <td id="td_designation_exp2"> Designation <input type="text" name="designation_exp2"
+                            id="designation_exp2"> <span class="required_exp2" style="margin-left: 5px;"></span></td>
+                    <td id="td_date_of_join_exp2"> From <input type="text" id="date_of_join_exp2"
+                            name="date_of_join_exp2"> <span class="required_exp2" style="margin-left: 5px;"></span></td>
+                    <td id="td_date_of_coplition_exp2"> To <input type="text" id="date_of_coplition_exp2"
+                            name="date_of_coplition_exp2"> <span class="required_exp2" style="margin-left: 5px;"></span>
                     </td>
                 </tr>
                 <tr>
-                    <td id="td_companyname3"> Company name <input type="text" id="companyname3" name="companyname3"><span
-                            class="required_exp3" style="margin-left: 5px;"></span> </td>
-                    <td id="td_designation_exp3"> Designation <input type="text" id="designation_exp3" name="designation_exp3"><span
-                            class="required_exp3" style="margin-left: 5px;"></span> </td>
-                    <td  id="td_date_of_join_exp3"> From <input type="text" id="date_of_join_exp3" name="date_of_join_exp3"><span
-                            class="required_exp3" style="margin-left: 5px;"></span> </td>
-                    <td id="td_date_of_coplition_exp3"> To <input type="text" id="date_of_coplition_exp3" name="date_of_coplition_exp3">
+                    <td id="td_companyname3"> Company name <input type="text" id="companyname3"
+                            name="companyname3"><span class="required_exp3" style="margin-left: 5px;"></span> </td>
+                    <td id="td_designation_exp3"> Designation <input type="text" id="designation_exp3"
+                            name="designation_exp3"><span class="required_exp3" style="margin-left: 5px;"></span> </td>
+                    <td id="td_date_of_join_exp3"> From <input type="text" id="date_of_join_exp3"
+                            name="date_of_join_exp3"><span class="required_exp3" style="margin-left: 5px;"></span> </td>
+                    <td id="td_date_of_coplition_exp3"> To <input type="text" id="date_of_coplition_exp3"
+                            name="date_of_coplition_exp3">
                     </td>
                 </tr>
             </table>
@@ -354,318 +358,219 @@
     </form>
     <script>
         let submittype = '<%= submittype %>';
-        let id = '<%= id %>'
-        if (submittype == 'update') {
-            document.getElementById('id').value = id;
-            async function func1(id) {
-                let url = await fetch(`${location.origin}/fetch/?id=${id}`)
-                url = await url.json();
-                //BASIC DETAIL
-                let basicinput = document.getElementById('basicdetailtable').getElementsByTagName('input');
-                let j = 0;
-                for (let i = 0; i < basicinput.length; i++) {
-                    basicinput[i].value = url.result1[0][basicinput[i].name];
+        let id = '<%= id %>';
+    
+        async function fetchData(id) {
+            try {
+                let response = await fetch(`${location.origin}/fetch/?id=${id}`);
+                let data = await response.json();
+                return data;
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        }
+    
+        function populateBasicDetails(data) {
+            let basicInputs = document.getElementById('basicdetailtable').getElementsByTagName('input');
+            for (let input of basicInputs) {
+                input.value = data.result1[0][input.name] || '';
+            }
+    
+            let genderInputs = document.getElementsByName('gender');
+            genderInputs[0].checked = data.result1[0].gender === 'Male';
+            genderInputs[1].checked = data.result1[0].gender === 'Female';
+    
+            let rstatusInputs = document.getElementsByName('rstatus');
+            rstatusInputs[0].selected = data.result1[0].rstatus === 'single';
+            rstatusInputs[1].selected = data.result1[0].rstatus !== 'single';
+    
+            document.getElementById('address1').value = data.result1[0].address1 || '';
+            document.getElementById('address2').value = data.result1[0].address2 || '';
+        }
+    
+        function populateEducationDetails(data) {
+            let educationDetails = ['ssc', 'hsc', 'bach', 'mas'];
+            educationDetails.forEach((level, index) => {
+                if (data.result2[index]) {
+                    document.getElementById(`nob_${level}`).value = data.result2[index].board_course || '';
+                    document.getElementById(`ps_${level}`).value = data.result2[index].passing_year || '';
+                    document.getElementById(`tage_${level}`).value = data.result2[index].percentage || '';
                 }
-                let gen = document.getElementsByName('gender');
-                if (url.result1[0].gender == 'Male') {
-                    gen[0].checked = "true";
-                }
-                else {
-                    gen[1].checked = "true";
-                }
-                let rstatus = document.getElementsByName('rstatus');
-                if (url.result1[0].rstatus == 'single') {
-                    rstatus[0][0].selected = 'selected';
-                }
-                else {
-                    rstatus[0][1].selected = 'selected';
-                }
-                document.getElementById('address1').value = url.result1[0].address1;
-                document.getElementById('address2').value = url.result1[0].address2;
-
-                //EDUCATION DETAIL
-                if (url.result2.length != 0) {
-                    document.getElementById('nob_ssc').value = url.result2[0].board_course;
-                    document.getElementById('ps_ssc').value = url.result2[0].passing_year;
-                    document.getElementById('tage_ssc').value = url.result2[0].percentage;
-
-                    document.getElementById('nob_hsc').value = url.result2[1].board_course;
-                    document.getElementById('ps_hsc').value = url.result2[1].passing_year;
-                    document.getElementById('tage_hsc').value = url.result2[1].percentage;
-
-
-                    document.getElementById('coursename_bach').value = url.result2[2].board_course;
-                    document.getElementById('ps_bach').value = url.result2[2].passing_year;
-                    document.getElementById('tage_bach').value = url.result2[2].percentage;
-
-                    document.getElementById('coursename_mas').value = url.result2[3].board_course;
-                    document.getElementById('ps_mas').value = url.result2[3].passing_year;
-                    document.getElementById('tage_mas').value = url.result2[3].percentage;
-                }
-
-                //WORK EXPERIENCE 
-
-                if (url.result3.length != 0) {
-                    if (url.result3[0] != null) {
-                        document.getElementById('companyname1').value = url.result3[0].ComapanyName;
-                        document.getElementById('designation_exp1').value = url.result3[0].Designation;
-                        document.getElementById('date_of_join_exp1').value = url.result3[0].Dateofjoining;
-                        document.getElementById('date_of_coplition_exp1').value = url.result3[0].Dateofcompliting;
-                    }
-                    if (url.result3[1] != null) { 
-                        document.getElementById('companyname2').value = url.result3[1].ComapanyName;
-                        document.getElementById('designation_exp2').value = url.result3[1].Designation;
-                        document.getElementById('date_of_join_exp2').value = url.result3[1].Dateofjoining;
-                        document.getElementById('date_of_coplition_exp2').value = url.result3[1].Dateofcompliting;
-                    }
-                    else{
-                        document.getElementById('td_companyname2').style.visibility = "hidden";
-                        document.getElementById('td_designation_exp2').style.visibility = "hidden";
-                        document.getElementById('td_date_of_join_exp2').style.visibility = "hidden";
-                        document.getElementById('td_date_of_coplition_exp2').style.visibility = "hidden";
-                    }
-                    if (url.result3[2] != null) {
-                        document.getElementById('companyname3').value = url.result3[2].ComapanyName;
-                        document.getElementById('designation_exp3').value = url.result3[2].Designation;
-                        document.getElementById('date_of_join_exp3').value = url.result3[2].Dateofjoining;
-                        document.getElementById('date_of_coplition_exp3').value = url.result3[2].Dateofcompliting;
-                    }
-                    else{
-                        document.getElementById('td_companyname3').style.visibility = "hidden";
-                        document.getElementById('td_designation_exp3').style.visibility = "hidden";
-                        document.getElementById('td_date_of_join_exp3').style.visibility = "hidden";
-                        document.getElementById('td_date_of_coplition_exp3').style.visibility = "hidden";
-                    }
-                }
-                //LANGUAGE
-                if (url.result4.length != 0) {
-                    if (url.result4[0].can_read == 1) {
-                        document.getElementById('rhindi').checked = true;
-                    }
-                    else {
-                        document.getElementById('rhindi').checked = false;
-                    }
-                    if (url.result4[0].can_write == 1) {
-                        document.getElementById('whindi').checked = true;
-                    }
-                    else {
-                        document.getElementById('whindi').checked = false;
-                    }
-                    if (url.result4[0].can_speak == 1) {
-                        document.getElementById('shindi').checked = true;
-                    }
-                    else {
-                        document.getElementById('shindi').checked = false;
-                    }
-
-                    if (url.result4[1].can_read == 1) {
-                        document.getElementById('renglish').checked = true;
-                    }
-                    else {
-                        document.getElementById('renglish').checked = false;
-                    }
-                    if (url.result4[1].can_write == 1) {
-                        document.getElementById('wenglish').checked = true;
-                    }
-                    else {
-                        document.getElementById('wenglish').checked = false;
-                    }
-                    if (url.result4[1].can_speak == 1) {
-                        document.getElementById('senglish').checked = true;
-                    }
-                    else {
-                        document.getElementById('senglish').checked = false;
-                    }
-
-                    if (url.result4[2].can_read == 1) {
-                        document.getElementById('rgujarati').checked = true;
-                    }
-                    else {
-                        document.getElementById('rgujarati').checked = false;
-                    }
-                    if (url.result4[2].can_write == 1) {
-                        document.getElementById('wgujarati').checked = true;
-                    }
-                    else {
-                        document.getElementById('wgujarati').checked = false;
-                    }
-                    if (url.result4[2].can_speak == 1) {
-                        document.getElementById('sgujarati').checked = true;
-                    }
-                    else {
-                        document.getElementById('sgujarati').checked = false;
-                    }
-                }
-                //TECHNOLOGY
-
-                if (url.result5[0].Name_of_technology == 'PHP') {
-                    document.getElementById('phpcheckbox').checked = true;
-
-                    let experties1 = document.getElementsByName('php')
-                    for (let i = 0; i < experties1.length; i++) {
-                        if (url.result5[0].Experties == experties1[i].value) {
-                            document.getElementById(`${experties1[j].value}1`).checked = true;
-                        }
-                    }
-                }
-                if (url.result5[1].Name_of_technology == 'MySql') {
-                    document.getElementById('mysqlcheckbox').checked = true;
-
-                    let experties2 = document.getElementsByName('mysql')
-                    for (let j = 0; j < experties2.length; j++) {
-                        if (url.result5[1].Experties == experties2[j].value) {
-                            document.getElementById(`${experties1[j].value}2`).checked = true;
-                        }
-                    }
-                }
-                if (url.result5[2].Name_of_technology == 'Laravel') {
-                    document.getElementById('laravelcheckbox').checked = true;
-
-                    let experties2 = document.getElementsByName('laravel')
-                    for (let z = 0; z < experties2.length; z++) {
-                        if (url.result5[2].Experties == experties2[z].value) {
-                            document.getElementById(`${experties1[z].value}3`).checked = true;
-                        }
-                    }
-                }
-                if (url.result5[3].Name_of_technology == 'Oracle') {
-                    document.getElementById('oraclecheckbox').checked = true;
-
-                    let experties = document.getElementsByName('oracle')
-                    for (let k = 0; k < experties.length; k++) {
-                        if (url.result5[3].Experties == experties[k].value) {
-                            document.getElementById(`${experties1[k].value}4`).checked = true;
-                        }
-                    }
-                }
-
-
-                //REFERANCE
-                document.getElementById('ref_name_1').value = url.result6[0].NameOfContact;
-                document.getElementById('contact_ref_1').value = url.result6[0].ContactNumber;
-
-                document.getElementById('contact_ref_relation_1').value = url.result6[0].Relation;
-
-                document.getElementById('ref_name_2').value = url.result6[1].NameOfContact;
-                document.getElementById('contact_ref_2').value = url.result6[1].ContactNumber;
-                document.getElementById('contact_ref_relation_2').value = url.result6[1].Relation;
-
-                //PREFERENCES
-
-                document.getElementById('notice_prd').value = url.result7[0].notice_period;
-                document.getElementById('exp_ctc').value = url.result7[0].expected_ctc;
-                document.getElementById('cur_ctc').value = url.result7[0].curr_ctc;
-
-                let x = document.getElementById('department').getElementsByTagName('option');
-
-                if (x[0].value == url.result7[0].department) {
-                    document.getElementById(x[0].value).selected = 'selected';
-                }
-                if (x[1].value == url.result7[0].department) {
-                    document.getElementById(x[0].value).selected = 'selected';
+            });
+        }
+    
+        function populateWorkExperience(data) {
+            let workExperienceCount = Math.min(data.result3.length, 3);
+            for (let i = 0; i < workExperienceCount; i++) {
+                let experience = data.result3[i];
+                if (experience) {
+                    document.getElementById(`companyname${i + 1}`).value = experience.ComapanyName || '';
+                    document.getElementById(`designation_exp${i + 1}`).value = experience.Designation || '';
+                    document.getElementById(`date_of_join_exp${i + 1}`).value = experience.Dateofjoining || '';
+                    document.getElementById(`date_of_coplition_exp${i + 1}`).value = experience.Dateofcompliting || '';
                 }
             }
-            func1(id);
+    
+            // Hide additional rows if less than 3 experiences
+            for (let i = workExperienceCount; i < 3; i++) {
+                document.getElementById(`td_companyname${i + 1}`).style.visibility = 'hidden';
+                document.getElementById(`td_designation_exp${i + 1}`).style.visibility = 'hidden';
+                document.getElementById(`td_date_of_join_exp${i + 1}`).style.visibility = 'hidden';
+                document.getElementById(`td_date_of_coplition_exp${i + 1}`).style.visibility = 'hidden';
+            }
         }
+    
+        function populateLanguages(data) {
+            data.result4.forEach((language, index) => {
+                if (index === 0) {
+                    document.getElementById('rhindi').checked = language.can_read === 1;
+                    document.getElementById('whindi').checked = language.can_write === 1;
+                    document.getElementById('shindi').checked = language.can_speak === 1;
+                } else if (index === 1) {
+                    document.getElementById('renglish').checked = language.can_read === 1;
+                    document.getElementById('wenglish').checked = language.can_write === 1;
+                    document.getElementById('senglish').checked = language.can_speak === 1;
+                } else if (index === 2) {
+                    document.getElementById('rgujarati').checked = language.can_read === 1;
+                    document.getElementById('wgujarati').checked = language.can_write === 1;
+                    document.getElementById('sgujarati').checked = language.can_speak === 1;
+                }
+            });
+        }
+    
+        function populateTechnologies(data) {
+            data.result5.forEach((tech, index) => {
+                let checkbox = document.getElementById(`${tech.Name_of_technology.toLowerCase()}checkbox`);
+                if (checkbox) {
+                    checkbox.checked = true;
+                    let radios = document.getElementsByName(tech.Name_of_technology.toLowerCase());
+                    radios.forEach(radio => {
+                        radio.disabled = !checkbox.checked;
+                        if (tech.Experties === radio.value) {
+                            document.getElementById(`${radio.value}${index + 1}`).checked = true;
+                        }
+                    });
+                }
+            });
+        }
+    
+        function populateReferences(data) {
+            data.result6.forEach((ref, index) => {
+                if (index < 2) {
+                    document.getElementById(`ref_name_${index + 1}`).value = ref.NameOfContact || '';
+                    document.getElementById(`contact_ref_${index + 1}`).value = ref.ContactNumber || '';
+                    document.getElementById(`contact_ref_relation_${index + 1}`).value = ref.Relation || '';
+                }
+            });
+        }
+    
+        function populatePreferences(data) {
+            document.getElementById('notice_prd').value = data.result7[0].notice_period || '';
+            document.getElementById('exp_ctc').value = data.result7[0].expected_ctc || '';
+            document.getElementById('cur_ctc').value = data.result7[0].curr_ctc || '';
+    
+            let departmentOptions = document.getElementById('department').getElementsByTagName('option');
+            for (let option of departmentOptions) {
+                if (option.value === data.result7[0].department) {
+                    option.selected = true;
+                }
+            }
+        }
+    
+        async function initializeForm() {
+            if (submittype === 'update') {
+                document.getElementById('id').value = id;
+                let data = await fetchData(id);
+    
+                populateBasicDetails(data);
+                populateEducationDetails(data);
+                populateWorkExperience(data);
+                populateLanguages(data);
+                populateTechnologies(data);
+                populateReferences(data);
+                populatePreferences(data);
+            }
+        }
+    
         async function submitdata() {
             validate();
             if (validate()) {
-                //FETCH URL AND POST THE DATA 
                 let form = document.getElementById('regForm');
-                const formData = new URLSearchParams(new FormData(form));
-                if (submittype == 'insert') {
-                    let url = `${location.origin}/dashboard/job_application_form_main/post_data`
-                    let res1 = await fetch(url, {
-                        method: "POST",
+                const formData = new URLSearchParams(new FormData(form)).toString();
+                let url = submittype === 'insert' ? `${location.origin}/dashboard/job_application_form_main/post_data` : `${location.origin}/dashboard/job_application_form_main/update`;
+    
+                try {
+                    let response = await fetch(url, {
+                        method: 'POST',
                         body: formData,
-                        headers: {
-                            "Content-type": "application/x-www-form-urlencoded"
-                        }
+                        headers: { 'Content-type': 'application/x-www-form-urlencoded' }
                     });
-                    let response = await res1.json();
-
-                    //BACKEND VALIDATION ERROR 
-                    if (response.fail == null) {
-                        form.style.visibility = "hidden";
-                        document.getElementById('response').innerText = "ERROR IN YOUR INPUT";
+                    let result = await response.json();
+    
+                    if (result.fail === null) {
+                        form.style.visibility = 'hidden';
+                        document.getElementById('response').innerText = 'ERROR IN YOUR INPUT';
+                    } else if (result.fail === 'no') {
+                        form.style.visibility = 'hidden';
+                        document.getElementById('response').innerText = submittype === 'insert' ? 'YOUR RESPONSE HAVE BEEN SUBMITTED' : 'YOUR DATA HAVE BEEN UPDATED';
                     }
-
-                    //RESPONSE FOR SUCCESS OF SUBMIT 
-                    if (response.fail == "no") {
-                        form.style.visibility = "hidden";
-                        document.getElementById('response').innerText = "YOUR RESPONSE HAVE BEEN SUBMITTED";
-                        document.getElementById('response').autofocus;
-                    }
-                }
-                else {
-                    let url = `${location.origin}/dashboard/job_application_form_main/update`
-                    let res1 = await fetch(url, {
-                        method: "POST",
-                        body: formData,
-                        headers: {
-                            "Content-type": "application/x-www-form-urlencoded"
-                        }
-                    });
-                    let response = await res1.json();
-
-                    //BACKEND VALIDATION ERROR 
-                    if (response.fail == null) {
-                        form.style.visibility = "hidden";
-                        document.getElementById('response').innerText = "ERROR IN YOUR INPUT";
-                        document.getElementById('response').style.color = "black";
-                    }
-
-                    //RESPONSE FOR SUCCESS OF SUBMIT 
-                    if (response.fail == "no") {
-                        form.style.visibility = "hidden";
-                        document.getElementById('response').innerText = "YOUR DATA HAVE BEEN UPDATED";
-                    }
+                } catch (error) {
+                    console.error('Error submitting data:', error);
                 }
             }
         }
-
-        //FOR DISPLAYING STATES 
+    
         async function state() {
-            let sl = document.getElementById('state');
-            let url = await fetch(`${location.origin}/dashboard/job_application_form_main/get_state`);
-
-            let resp = await url.json();
-
-            // .then(resp => resp.json())
-            Object.keys(resp).forEach(key => {
-                Object.keys(resp[key]).forEach(key1 => {
-                    let newOption = new Option(resp[key][key1].name, resp[key][key1].id, false, false);
-                    newOption.setAttribute("name", "statename")
-                    sl.appendChild(newOption);
-
-                })
-            })
-
+            try {
+                let response = await fetch(`${location.origin}/dashboard/job_application_form_main/get_state`);
+                let states = await response.json();
+    
+                let stateSelect = document.getElementById('state');
+                for (let key in states) {
+                    for (let subKey in states[key]) {
+                        let option = new Option(states[key][subKey].name, states[key][subKey].id);
+                        option.setAttribute('name', 'statename');
+                        stateSelect.appendChild(option);
+                    }
+                }
+            } catch (error) {
+                console.error('Error fetching states:', error);
+            }
         }
-
-        //FOR DISPLAYING CITIES WHEN CLICK ON STATE
+    
         async function selectcity(id) {
-            let url = await fetch(`${location.origin}/dashboard/job_application_form_main/get_city/?id=${id}`)
-                .then(resp => resp.json())
-            let sl = document.getElementById('city');
-            sl.innerHTML = null;
-
-            Object.keys(url).forEach(key => {
-                Object.keys(url[key]).forEach(key1 => {
-                    let newOption = new Option(url[key][key1].city, url[key][key1].city, false, false);
-                    newOption.setAttribute("name", "cityname[]")
-                    sl.appendChild(newOption);
-                })
-            })
+            try {
+                let response = await fetch(`${location.origin}/dashboard/job_application_form_main/get_city/?id=${id}`);
+                let cities = await response.json();
+    
+                let citySelect = document.getElementById('city');
+                citySelect.innerHTML = '';
+                for (let key in cities) {
+                    for (let subKey in cities[key]) {
+                        let option = new Option(cities[key][subKey].city, cities[key][subKey].city);
+                        option.setAttribute('name', 'cityname[]');
+                        citySelect.appendChild(option);
+                    }
+                }
+            } catch (error) {
+                console.error('Error fetching cities:', error);
+            }
         }
-
-        //ENABLING RADIO BUTTON OF TECHNOLOGY WHEN WE SELECT CORRESPONDING CHECKBOX
+    
         function enableradio(check) {
             const radios = check.closest('tr').querySelectorAll('input[type="radio"]');
             radios.forEach(radio => {
                 radio.disabled = !check.checked;
             });
         }
+    
+        document.addEventListener('DOMContentLoaded', () => {
+            if (submittype === 'update') {
+                initializeForm();
+            }
+            state();
+        });
     </script>
 </body>
+
 </html>

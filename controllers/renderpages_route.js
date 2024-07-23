@@ -11,6 +11,9 @@ exports.Javascript_Events = async (req, res) => {
 exports.KuKucube = async (req, res) => {
     res.render('KuKucube');
 }
+exports.TicTaeToe = async (req, res) => {
+    res.render('tictaetoe');
+}
 exports.ehya_tamplate= async (req,res)=>{
     res.sendFile(path.join(__dirname, '../public/temp_1/assignment_1.html'));
 }

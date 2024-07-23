@@ -22,7 +22,6 @@ exports.register=async (req,res)=> {
     else {
         var randomcode = Math.round((Math.pow(36, 13) - Math.random() * Math.pow(36, 12))).toString(36).slice(1);
         var fr_query = `insert into registration(fname,email,detailforpass,activation_code,active_status) values ('${fname}','${email}','${ukdetail}','${randomcode}',0)`;
-        console.log(fr_query);
         await execute(fr_query);
         res.json({ randomcode, exist })
     }
@@ -32,7 +31,7 @@ exports.activate = async(req,res)=>{
     var result = await execute(check_activate);
     var expire = '';
     var tog = `select createdtime from registration where email='${req.query.email}'`
-    var timeofgeneration = await execute(tog);
+    var timeofgeneration = (await execute(tog))[0].createdtime;
     var currentdate = new Date();
     var datetime = currentdate.getFullYear() + "-" +
         ('0' + (currentdate.getMonth() + 1)).slice(-2) + "-" +
@@ -43,7 +42,6 @@ exports.activate = async(req,res)=>{
 
     const dateDifferenceInSeconds = (dateInitial, dateFinal) =>
         (dateFinal - dateInitial) / 1_000;
-
     if (result[0].activation_code == req.query.code) {
 
         if (dateDifferenceInSeconds(new Date(timeofgeneration), new Date(datetime)) > 3600) {

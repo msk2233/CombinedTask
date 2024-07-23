@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>tic tae toe</title>
+    <style>
+        body {
+            background-color: beige;
+        }
+        #tb {
+            margin-top: 50px;
+        }
+        td {
+            padding: 30px;
+            background-color: cadetblue;
+        }
+        .restart {
+            display: flex;
+            margin-top: 20px;
+            font-size: 30px;
+        }
+    </style>
+</head>
+<body id="body">
+<h2>SHRUTI MOKARIYA</h2>
+<center>
+    <h1 style="margin-top: 30px">TIC TAC TOE</h1>
+    <div>
+        USER 1:<input
+            type="submit"
+            value="X"
+            id="x"
+            style="
+                padding-left: 1cm;
+                padding-right: 1cm;
+                padding-top: 0.5cm;
+                padding-bottom: 0.5cm;
+            "
+        />
+        <br />
+        USER 2:<input
+            type="submit"
+            value="O"
+            id="o"
+            style="
+                padding-left: 1cm;
+                padding-right: 1cm;
+                padding-top: 0.5cm;
+                padding-bottom: 0.5cm;
+            "
+        />
+    </div>
+    <div id="table">
+        <table id="tb" border="1" onclick="onclickevent()">
+            <tr>
+                <td id="td1" onclick="tictac1()"></td>
+                <td id="td2" onclick="tictac2()"></td>
+                <td id="td3" onclick="tictac3()"></td>
+            </tr>
+            <tr>
+                <td id="td4" onclick="tictac4()"></td>
+                <td id="td5" onclick="tictac5()"></td>
+                <td id="td6" onclick="tictac6()"></td>
+            </tr>
+            <tr>
+                <td id="td7" onclick="tictac7()"></td>
+                <td id="td8" onclick="tictac8()"></td>
+                <td id="td9" onclick="tictac9()"></td>
+            </tr>
+        </table>
+    </div>
+</center>
+<script>
+    var body = document.getElementById("body");
+    var tic1 = document.getElementById("td1");
+    var tic2 = document.getElementById("td2");
+    var tic3 = document.getElementById("td3");
+    var tic4 = document.getElementById("td4");
+    var tic5 = document.getElementById("td5");
+    var tic6 = document.getElementById("td6");
+    var tic7 = document.getElementById("td7");
+    var tic8 = document.getElementById("td8");
+    var tic9 = document.getElementById("td9");
+    var count = 0;
+
+    function tictac1() {
+        if (count % 2 == 0) {
+            tic1.innerHTML = "X";
+        } else {
+            tic1.innerHTML = "O";
+        }
+        count++;
+    }
+
+    function tictac2() {
+        if (count % 2 == 0) {
+            tic2.innerHTML = "X";
+        } else {
+            tic2.innerHTML = "O";
+        }
+        count++;
+    }
+
+    function tictac3() {
+        if (count % 2 == 0) {
+            tic3.innerHTML = "X";
+        } else {
+            tic3.innerHTML = "O";
+        }
+        count++;
+    }
+
+    function tictac4() {
+        if (count % 2 == 0) {
+            tic4.innerHTML = "X";
+        } else {
+            tic4.innerHTML = "O";
+        }
+        count++;
+    }
+
+    function tictac5() {
+        if (count % 2 == 0) {
+            tic5.innerHTML = "X";
+        } else {
+            tic5.innerHTML = "O";
+        }
+        count++;
+    }
+
+    function tictac6() {
+        if (count % 2 == 0) {
+            tic6.innerHTML = "X";
+        } else {
+            tic6.innerHTML = "O";
+        }
+        count++;
+    }
+
+    function tictac7() {
+        if (count % 2 == 0) {
+            tic7.innerHTML = "X";
+        } else {
+            tic7.innerHTML = "O";
+        }
+        count++;
+    }
+
+    function tictac8() {
+        if (count % 2 == 0) {
+            tic8.innerHTML = "X";
+        } else {
+            tic8.innerHTML = "O";
+        }
+        count++;
+    }
+
+    function tictac9() {
+        if (count % 2 == 0) {
+            tic9.innerHTML = "X";
+        } else {
+            tic9.innerHTML = "O";
+        }
+        count++;
+    }
+
+    function onclickevent() {
+        wincondition();
+    }
+
+    function wincondition() {
+        const cells = [
+            tic1.innerHTML,
+            tic2.innerHTML,
+            tic3.innerHTML,
+            tic4.innerHTML,
+            tic5.innerHTML,
+            tic6.innerHTML,
+            tic7.innerHTML,
+            tic8.innerHTML,
+            tic9.innerHTML,
+        ];
+
+        // Define winning combinations
+        const winCombinations = [
+            [0, 1, 2],
+            [3, 4, 5],
+            [6, 7, 8],
+            [0, 3, 6],
+            [1, 4, 7],
+            [2, 5, 8],
+            [0, 4, 8],
+            [2, 4, 6],
+        ];
+
+        for (let i = 0; i < winCombinations.length; i++) {
+            const [a, b, c] = winCombinations[i];
+
+            let tab = document.getElementById("table");
+            // Check if the cells contain the same symbol and not empty
+            if (
+                cells[a] !== "" &&
+                cells[a] === cells[b] &&
+                cells[a] === cells[c]
+            ) {
+                tab.innerText = `${cells[a]} is the winner`;
+                tab.style.marginTop = "40px";
+                tab.style.fontSize = "40px";
+                var restart = document.createElement("button");
+                restart.innerHTML = "ReStart Game";
+                restart.className = "restart";
+                restart.onclick = function(){
+                    location.reload();
+                }
+                tab.appendChild(restart);
+                return;
+            }
+        }
+        // Check for draw
+        if (!cells.includes("")) {
+            alert("It's a draw!");
+        }
+    }
+</script>
+</body>
+</html>
